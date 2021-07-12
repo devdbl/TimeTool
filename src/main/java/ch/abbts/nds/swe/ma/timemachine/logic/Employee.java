@@ -1,20 +1,30 @@
 package ch.abbts.nds.swe.ma.timemachine.logic;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "personal")
 public class Employee {
-    private Integer personalId;
+    @Id
+    @Column(name = "PERSONAL_ID")
+    private int personalId;
+    @Column(name = "FIRSTNAME")
     private String firstName;
+    @Column(name = "LASTNAME")
     private String lastName;
+    @Column(name = "SHORTNAME")
     private String shortName;
+    @Column(name = "ROLE")
     private int role;
 
     public Employee() {
     }
 
-    public Integer getPersonalId() {
+    public int getPersonalId() {
         return personalId;
     }
 
-    public void setPersonalId(Integer personalId) {
+    public void setPersonalId(int personalId) {
         this.personalId = personalId;
     }
 
