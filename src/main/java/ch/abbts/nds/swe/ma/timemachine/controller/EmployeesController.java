@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping(path = "/employees")//Jump over security
+@RequestMapping(path = "/employees")
 public class EmployeesController {
     @Autowired
     private UserRepo userRepository;
 
     @PostMapping(path = "/add")
-    public @ResponseBody String addNewUser( @RequestParam String firstName, @RequestParam String lastName, @RequestParam String shortName, @RequestParam int personalId, @RequestParam int role){
+    public void addNewUser( @RequestParam String firstName, @RequestParam String lastName, @RequestParam String shortName, @RequestParam int personalId, @RequestParam int role){
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
         Employee employee = new Employee();
@@ -24,7 +24,6 @@ public class EmployeesController {
         employee.setPersonalId(personalId);
         employee.setRole(role);
         userRepository.save(employee);
-        return "Saved";
     }
     @GetMapping(path="/allUsers")
     public @ResponseBody Iterable<Employee> getAllUsers() {
