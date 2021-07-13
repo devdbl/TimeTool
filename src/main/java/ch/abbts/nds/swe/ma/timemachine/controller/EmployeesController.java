@@ -2,7 +2,7 @@ package ch.abbts.nds.swe.ma.timemachine.controller;
 
 
 import ch.abbts.nds.swe.ma.timemachine.logic.Employee;
-import ch.abbts.nds.swe.ma.timemachine.logic.UserRepo;
+import ch.abbts.nds.swe.ma.timemachine.logic.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/employees")
 public class EmployeesController {
     @Autowired
-    private UserRepo userRepository;
+    private EmployeeRepo employeeRepository;
 
     @PostMapping(path = "/add")
     public void addNewUser( @RequestParam String firstName, @RequestParam String lastName, @RequestParam String shortName, @RequestParam int personalId, @RequestParam int role){
@@ -21,11 +21,11 @@ public class EmployeesController {
         employee.setShortName(shortName);
         employee.setPersonalId(personalId);
         employee.setRole(role);
-        userRepository.save(employee);
+        employeeRepository.save(employee);
     }
     @GetMapping(path="/allUsers")
     public @ResponseBody Iterable<Employee> getAllUsers() {
-        return userRepository.findAll();
+        return employeeRepository.findAll();
     }
 
 }
