@@ -15,8 +15,6 @@ public class EmployeesController {
 
     @PostMapping(path = "/add")
     public void addNewUser( @RequestParam String firstName, @RequestParam String lastName, @RequestParam String shortName, @RequestParam int personalId, @RequestParam int role){
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
         Employee employee = new Employee();
         employee.setFirstName(firstName);
         employee.setLastName(lastName);
@@ -27,7 +25,6 @@ public class EmployeesController {
     }
     @GetMapping(path="/allUsers")
     public @ResponseBody Iterable<Employee> getAllUsers() {
-        // This returns a JSON or XML with the users
         return userRepository.findAll();
     }
 
