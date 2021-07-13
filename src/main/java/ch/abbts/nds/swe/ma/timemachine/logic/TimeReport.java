@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "time")
-public class Time {
+public class TimeReport {
     @Id
     @Column(name = "PROJECT_ID")
     private double projectId;
@@ -26,7 +26,7 @@ public class Time {
     @Column(name = "COMMENT")
     private String comment;
 
-    public Time() {    }
+    public TimeReport() {    }
 
     public double getProjectId() {
         return projectId;
