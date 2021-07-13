@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/projects")
+@RequestMapping(path = "/project")
 public class ProjectController {
     @Autowired
     private ProjectRepo projectRepository;
