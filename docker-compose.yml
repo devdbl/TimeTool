@@ -1,6 +1,3 @@
 version: "3.0"
 services:
-  spring-starter:
-    build: .
-    ports:
-      - "8080:8080"
+  
