@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Projekt</title>
+</head>
+<body>
+    <h1>Projekte zum editieren</h1>
+
+        require_once("../controllers/DatabaseController.php");
+        $db = new DatabaseController;
+        $db->Rows();
+        echo $db;
+        $db->NumRows();
+        echo $db;
+
+</body>
+</html>

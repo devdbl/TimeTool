@@ -44,7 +44,15 @@ class DatabaseController {
         }
         return $rows;
     }
-
+    //Return table
+    public function Select($tabel){
+        $sql = "SELECT * FROM $tabel";
+        $this->_result = $this->_link->query($sql) or die(mysqli_error($this->_link));
+        while ($row = $this->_result->fetch_object()){
+            echo "<li>".htmlspecialchars($row->PROJECT_ID)
+                       .htmlspecialchars($row->PROJECTNAME)."</li>";
+        }
+    }
     // Used by other classes to get the connection
     public function GetLink() {
         return $this->_link;
