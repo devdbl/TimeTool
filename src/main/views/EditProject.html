@@ -3,16 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Projekt</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script>
+        $(document).ready(function(){
+            $("#showProject").click(function(){
+                $.get( "http://localhost/controllers/DatabaseTest.php", function( data ) {
+                    var ProjectArray = JSON.parse(data);
+                    ProjectArray.forEach(function(Project){
+                        $("#ProjectListe").append("<li>" + Project.PROJECT_ID + " " + Project.PROJECTNAME + " " + Project.DESCRIPTION + "</li>");
+                    });
+                });
+
+            });
+        })
+    </script>
 </head>
 <body>
-    <h1>Projekte zum editieren</h1>
-
-        require_once("../controllers/DatabaseController.php");
-        $db = new DatabaseController;
-        $db->Rows();
-        echo $db;
-        $db->NumRows();
-        echo $db;
-
+<div class="container">
+    <button id="showProject" class="btn btn-primary">Projekte anzeigen</button>
+    <h1>Unsere Projekte sind</h1>
+    <ol id="ProjectListe"></ol>
+    <h2>Angabe der Projektdaten</h2>
+    <form action="../controllers/EditProjectController.php" method="post">
+        ProjektId   <input type="number" step="any" name="ProjectID" /> <br/>
+        Projektname <input type="text" name="ProjectName" /> <br/>
+        ProjektId   <input type="text" name="ProjectDescription" /> <br/><br/>
+        <input type="submit" name="Submit" value="Projekt aktualisieren" />
+    </form>
+</div>
 </body>
 </html>
