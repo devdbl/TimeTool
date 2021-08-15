@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Projekt</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+    <link rel="stylesheet" href="../CSS/app.css">
+    <script>
+        $(document).ready(function(){
+            $("#showProject").click(function(){
+                $.get( "http://localhost/logic/editProject.php", function( data ) {
+                    var ProjectArray = [];
+                    var i = 1;
+                    ProjectArray = JSON.parse(data);
+                    ProjectArray.forEach(function(Project){
+                        $("#ProjectListe").append("<li>" + Project.PROJECT_ID + " " + Project.PROJECTNAME + " " + Project.DESCRIPTION + "</li>");
+                        $("#ProjectAuswahl").append("<li>" + i + "</li>")
+                        i++;
+                    });
+                });
+
+            });
+        })
+    </script>
+</head>
+<body>
+<div class="container">
+    <button id="showProject" class="btn btn-primary">Projekte anzeigen</button>
+    <h1>Unsere Projekte sind</h1>
+    <ol id="ProjectListe"></ol>
+    <h2>Projekt auswählen</h2>
+    <select name="Projekt Wahl">
+        <option value="0">Projekt wählen</option>
+    </select>
+    <ol id="ProjectAuswahl"></ol>
+    <form action="../../logic/editProjectForm.php" method="post">
+        ProjektId   <input type="number" step="any" name="ProjectID" /> <br/>
+        Projektname <input type="text" name="ProjectName" /> <br/>
+        ProjektId   <input type="text" name="ProjectDescription" /> <br/><br/>
+        <input type="submit" name="Submit" value="Projekt aktualisieren" />
+    </form>
+    <br>
+    <a href='../../index.html'>go back</a>
+</div>
+</body>
+</html>

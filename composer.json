@@ -1,5 +1,10 @@
 {
     "require": {
-        "monolog/monolog": "2.0.*"
+        "twbs/bootstrap": "5.1.0",
+        "phpunit/phpunit": "9.5.8",
+        "phpunit/php-timer": "5.0.3",
+        "monolog/monolog": "2.3.2",
+        "webmozart/assert": "1.10.0"
+
     }
 }
