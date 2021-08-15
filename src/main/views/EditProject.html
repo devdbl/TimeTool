@@ -8,7 +8,7 @@
     <script>
         $(document).ready(function(){
             $("#showProject").click(function(){
-                $.get( "http://localhost/controllers/DatabaseTest.php", function( data ) {
+                $.get( "http://localhost/logic/editProject.php", function( data ) {
                     var ProjectArray = JSON.parse(data);
                     ProjectArray.forEach(function(Project){
                         $("#ProjectListe").append("<li>" + Project.PROJECT_ID + " " + Project.PROJECTNAME + " " + Project.DESCRIPTION + "</li>");
@@ -25,7 +25,7 @@
     <h1>Unsere Projekte sind</h1>
     <ol id="ProjectListe"></ol>
     <h2>Angabe der Projektdaten</h2>
-    <form action="../logic/EditProjectController.php" method="post">
+    <form action="../logic/editProjectForm.php" method="post">
         ProjektId   <input type="number" step="any" name="ProjectID" /> <br/>
         Projektname <input type="text" name="ProjectName" /> <br/>
         ProjektId   <input type="text" name="ProjectDescription" /> <br/><br/>
