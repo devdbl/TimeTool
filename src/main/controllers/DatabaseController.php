@@ -1,5 +1,6 @@
 <?php
 // https://gist.github.com/jonashansen229/4463750
+
 class DatabaseController {
     protected $_link;
     protected $_result;
