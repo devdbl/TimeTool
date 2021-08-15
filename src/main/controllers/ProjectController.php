@@ -1,7 +1,7 @@
 <?php
 
 require_once("../controllers/DatabaseController.php");
-
+require_once("../controllers/Validation.php");
 
 
 
@@ -15,9 +15,10 @@ class ProjectController
     public function __construct()
     {
         $this->db = new DatabaseController();
-        $this->ProjectId = (isset($_POST["ProjectID"])&& is_numeric($_POST["ProjectID"])) ? $_POST["ProjectID"] : "";
-        $this->ProjectName = (isset($_POST["ProjectName"])&& is_string($_POST["ProjectName"])) ? $_POST["ProjectName"] : "";
-        $this->ProjectDescription = (isset($_POST["ProjectDescription"])&& is_string($_POST["ProjectDescription"])) ? $_POST["ProjectDescription"] : "";
+        $valid = new Validation();
+        $this->ProjectId = $valid->testInput((isset($_POST["ProjectID"])&& is_numeric($_POST["ProjectID"])) ? $_POST["ProjectID"] : "") ;
+        $this->ProjectName = $valid->testInput((isset($_POST["ProjectName"])&& is_string($_POST["ProjectName"])) ? $_POST["ProjectName"] : "");
+        $this->ProjectDescription = $valid->testInput((isset($_POST["ProjectDescription"])&& is_string($_POST["ProjectDescription"])) ? $_POST["ProjectDescription"] : "");
     }
 
     public function newProject(){
