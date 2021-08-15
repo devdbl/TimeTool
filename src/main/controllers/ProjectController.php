@@ -23,7 +23,7 @@ class ProjectController
 
     public function newProject(){
         $query = "INSERT INTO `project` (`PROJECT_ID`, `PROJECTNAME`, `DESCRIPTION`) VALUES
-                  ($this->ProjectId,'$this->ProjectName','$this->ProjectDescription')";
+                  ($this->Project->getProjectId(),'$this->ProjectName','$this->ProjectDescription')";
         $this->db->UpdateDB($query);
     }
 

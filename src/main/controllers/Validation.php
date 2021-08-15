@@ -3,10 +3,10 @@
 class Validation
 {
 
-    public function testInput($data){
+    public function testInput($data)
+    {
         $data = trim($data);
         $data = stripcslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
+        return htmlspecialchars($data);
     }
 }

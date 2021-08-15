@@ -1,6 +1,5 @@
 <?php
 
-namespace src\main\models;
 
 class Project
 {
