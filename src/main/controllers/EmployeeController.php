@@ -3,6 +3,8 @@ require_once("../models/User.php");
 require_once("../controllers/Validation.php");
 require_once("../controllers/DatabaseController.php");
 
+use Webmozart\Assert\Assert;
+
 class EmployeeController
 {
     private user $user;
@@ -27,6 +29,12 @@ class EmployeeController
 
     public function editEmployee($personalId){
 
+        $query = "UPDATE `timetool`.`employee` 
+                  SET 
+                    `PROJECTNAME` = '$this->ProjectName',
+                    `DESCRIPTION` = '$this->ProjectDescription' 
+                  WHERE (`PROJECT_ID` = $this->ProjectId)";
+        $this->db->UpdateDb($query);
     }
 
     public function deleteEmployee($personalId){
