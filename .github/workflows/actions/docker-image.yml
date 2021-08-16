@@ -1,0 +1,27 @@
+name: Docker Image CI
+
+on:
+  pull_request:
+    branches: [ $default-branch ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set tag var
+      id: vars
+      run: echo ::set-output name=docker_tag::$(echo ${GITHUB_REF} | cut -d'/' -f3)-${GITHUB_SHA}
+
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag TimeDock:$(date +%s)
+      
+    - name: Scan with Phonito Security
+      uses: phonito/phonito-scanner-action@main
+      with:
+         image: TimeDock:${{ steps.vars.outputs.docker_tag }}
+         phonito-token: ${{ secrets.PHONITO_TOKEN }}
