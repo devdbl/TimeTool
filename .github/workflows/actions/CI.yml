@@ -1,0 +1,21 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: php-actions/composer@v5
+    #- name: Setup PHP Action
+    #  uses: shivammathur/setup-php@2.12.0
+    - name: PHP Unit Tests
+      uses: php-actions/phpunit@v3
+      env:
+         TEST_NAME: JohnDoe
+       with:
+         bootstrap: vendor/autoload.php
+         configuration: test/phpunit.xml
+         args: --coverage-text
