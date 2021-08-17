@@ -45,16 +45,7 @@ class DatabaseController {
         }
         return $rows;
     }
-    //Return table
-    public function SelectAll($tabel){
-        $sql = "SELECT * FROM $tabel";
-        $this->_result = $this->_link->query($sql) or die(mysqli_error($this->_link));
-        $rows = array();
-        while ($row = $this->_result->fetch_assoc()){
-            $rows[] = $row;
-        }
-        echo json_encode($rows);
-    }
+
     // Used by other classes to get the connection
     public function GetLink() {
         return $this->_link;

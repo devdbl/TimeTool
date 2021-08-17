@@ -37,7 +37,7 @@ class ProjectController
         $this->db->UpdateDb($query);
     }
 
-    public function deleteProject(){
+    public function deactivateProject(){
 
     }
 }
