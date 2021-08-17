@@ -1,42 +1,88 @@
 <?php
 
-require_once("../controllers/DatabaseController.php");
-require_once("../controllers/Validation.php");
-require_once("../models/User.php");
+require_once("../models/ReportGateway.php");
 
 
 class ReportController
 {
-    private DatabaseController $db;
-    private Report $report;
-    private User $User;
+    private $db;
+    private $requestMethod;
+    private $projectId;
+    private $userId;
+    private $reportGateway;
 
-    public function __construct()
+
+    public function __construct($db, $requestMethod, $projectId, $userId)
     {
-        $this->db = new DatabaseController();
-        $this->report = new Report();
-        $this->User = new User();
+        $this->db = $db;
+        $this->requestMethod = $requestMethod;
+        $this->projectId = $projectId;
+        $this->userId = $userId;
+        $this->reportGateway = new ReportGateway;
     }
 
+    public function processRequest(){
+        switch($this->requestMethod){
+            case 'GET':
+                if($this->projectId && !$this->userId){
+                    $response = $this->getTimeReportProject($this->projectId);
+                }elseif (!$this->projectId && $this->userId){
+                    $response = $this->getTimeReportUser($this->userId);
+                }elseif ($this->projectId && $this->userId){
+                    $response = $this->getTimeReportProjectUser($this->projectId, $this->userId);
+                }else{
+                    $response = $this->getTimeReport();
+                }
+                break;
+            case 'POST':
+                $response = $this->addTimeReport();
+                break;
+            case 'DELETE':
+                break;
+            default:
+                $response = $this->notFoundRequest();
+                break;
+        }
+        header($response['status_code_header']);
+        if ($response['body']) {
+            echo $response['body'];
+        }
+    }
 
-    public function addTimeReport(){
+    private function addTimeReport(){
         //Der eingeloggt User will eine Buchung auf ein ausgewähltes bereits vorhandenes Projekt vornehmen
     }
 
-    public function getTimeReport(){
-        //Der eingeloggte User will seine erfassten Buchungen in einem bestimmten Zeitraum ansehen
+    private function getTimeReport(){
+        //Der eingeloggte User will seine erfassten Buchungen letzte 100 einträge
     }
 
-    public function getTimeReportUser(){
-        //Ein User will die erfassten Buchungen eines anderen User in einem bestimmten Zeitraum ansehen
+    private function getTimeReportUser(){
+        //Ein User will die letzten 100 Buchungen eines anderen User sehen
     }
 
-    public function getTimeReportProject(){
-        // ein User will alle erfassten Buchungen eines ausgewählten Projektes in einem bestimmten Zeitraum ansehen
+    private function getTimeReportProject(){
+        // ein User will die letzten 100 erfassten Buchungen eines ausgewählten Projektes
     }
 
-    public function getTimeReportProjectUser(){
-        //Ein User will alle erfassten Buchungen eines anderen User für ein bestimmtes Projekt in einem bestimmten Zeitraum sehen
+    private function getTimeReportProjectUser(){
+        //Ein User will die letzten 100 erfassten Buchungen eines anderen User für ein bestimmtes Projekt sehen
+    }
+
+    private function getTimeReportPeriod(){
+        //Der eingeloggte User will seine erfassten Buchungen in einem definierten Zeitraum sehen
+    }
+
+    private function getTimeReportUserPeriod(){
+        //Ein User will die  Buchungen eines anderen User in einem definierten Zeitraum sehen
+    }
+
+    private function getTimeReportProjectPeriod(){
+        // ein User will die erfassten Buchungen eines ausgewählten Projektes in einem definierten Zeitraum sehen
+    }
+
+    private function getTimeReportProjectUserPeriod(){
+        //Ein User will die erfassten Buchungen eines anderen User für ein bestimmtes Projekt in einem definierten Zeitraum sehen
     }
 
 }

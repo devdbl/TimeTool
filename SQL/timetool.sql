@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employee`
+-- Table structure for table `api`
 --
 
 CREATE TABLE `employee` (
@@ -39,7 +39,7 @@ CREATE TABLE `employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `employee`
+-- Dumping data for table `api`
 --
 
 INSERT INTO `employee` (`EMPLOYEE_ID`, `FIRSTNAME`, `LASTNAME`, `SHORTNAME`, `PASSWORD`, `ROLE`, `CREATED`, `UPDATED`) VALUES
@@ -89,7 +89,7 @@ CREATE TABLE `time` (
 --
 
 --
--- Indexes for table `employee`
+-- Indexes for table `api`
 --
 ALTER TABLE `employee`
   ADD PRIMARY KEY (`EMPLOYEE_ID`),
@@ -114,7 +114,7 @@ ALTER TABLE `time`
 --
 
 --
--- AUTO_INCREMENT for table `employee`
+-- AUTO_INCREMENT for table `api`
 --
 ALTER TABLE `employee`
   MODIFY `EMPLOYEE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000;

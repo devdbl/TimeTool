@@ -1,43 +1,126 @@
 <?php
 require_once("../models/User.php");
-require_once("../controllers/Validation.php");
-require_once("../controllers/DatabaseController.php");
+require_once("../models/EmployeeGateway.php");
 
-use Webmozart\Assert\Assert;
+class EmployeeController{
 
-class EmployeeController
-{
-    private user $user;
+    private $db;
+    private $requestMethod;
+    private $userId;
+    private $employeeGateway;
 
-    public function __construct()
+
+    /**
+     * @param $db
+     * @param $requestMethod
+     * @param $userId
+     */
+    public function __construct($db, $requestMethod, $userId)
     {
-        $this->user = new User();
-        $this->valid = new Validation();
-        $this->db = new DatabaseController();
+        $this->db = $db;
+        $this->requestMethod = $requestMethod;
+        $this->userId = $userId;
+        $this->employeeGateway = new EmployeeGateway($db);
     }
 
-    public function addEmployee(){
-        $this->user->setFirstname($this->valid->testInput((isset($_POST["firstname"]))));
-        $this->user->setLastname($this->valid->testInput((isset($_POST["lastname"]))));
-        $this->user->setPersonalId($this->valid->testInput((isset($_POST["personalId"]))));
-        $this->user->setShortname($this->valid->testInput((isset($_POST["shortname"]))));
-        $this->user->setEmail($this->valid->testInput((isset($_POST["email"]))));
-        $sql = "INSERT INTO `employee` (`EMPLOYEE_ID`, `FIRSTNAME`, `LASTNAME`, `SHORTNAME`, `PASSWORD`, `ROLE`, `CREATED`, `UPDATED`) VALUES
-                ($this->user->getPersonalId(),'$this->user->getFirstname()','$this->user->getLastname()',$this->user->getShortname(),'$this->user->getPasword()',$this->user->getRole(),timestamp ,timestamp )";
-        $this->db->UpdateDb($sql);
+    public function processRequest(){
+        switch($this->requestMethod){
+            case 'GET':
+                if($this->userId){
+                    $response = $this->getUser($this->userId);
+                }else{
+                    $response = $this->getAllUsers();
+                }
+                break;
+            case 'POST':
+                $response = $this->createUser();
+                break;
+            case 'PUT':
+                $response = $this->updateUser($this->userId);
+                break;
+            case 'DELETE':
+                $response = $this->deleteUser($this->userId);
+                break;
+            default:
+                $response = $this->notFoundRequest();
+                break;
+        }
+        header($response['status_code_header']);
+        if ($response['body']) {
+            echo $response['body'];
+        }
     }
 
-    public function editEmployee($personalId){
-
-        $query = "UPDATE `timetool`.`employee` 
-                  SET 
-                    `PROJECTNAME` = '$this->ProjectName',
-                    `DESCRIPTION` = '$this->ProjectDescription' 
-                  WHERE (`PROJECT_ID` = $this->ProjectId)";
-        $this->db->UpdateDb($query);
+    private function getAllUsers(){
+        $result = $this->employeeGateway->selectAll();
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
     }
 
-    public function deleteEmployee($personalId){
-
+    private function getUser($personalId){
+        $result = $this->employeeGateway->select($personalId);
+        if (! $result) {
+            return $this->notFoundRequest();
+        }
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
     }
+
+    private function createUser(){
+        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+        if (! $this->validatePerson($input)) {
+            return $this->unprocessableEntityResponse();
+        }
+        $this->employeeGateway->add($input);
+        $response['status_code_header'] = 'HTTP/1.1 201 Created';
+        $response['body'] = null;
+        return $response;
+    }
+
+    private function updateUser($personalId){
+        $result = $this->employeeGateway->select($personalId);
+        if (! $result) {
+            return $this->notFoundRequest();
+        }
+        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+        if (! $this->validatePerson($input)) {
+            return $this->unprocessableEntityResponse();
+        }
+        $this->employeeGateway->update($personalId, $input);
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = null;
+        return $response;
+    }
+
+    private function deleteUser($personalId){
+        echo "Funktioniert nicht: es wäre der Mitarbeiter mit der Personalnummer ".$personalId. " gelöscht worden";
+    }
+
+    private function validatePerson($input){
+        if (! isset($input['firstname'])) {
+            return false;
+        }
+        if (! isset($input['lastname'])) {
+            return false;
+        }
+        return true;
+    }
+
+    private function unprocessableEntityResponse(){
+        $response['status_code_header'] = 'HTTP/1.1 422 Unprocessable Entity';
+        $response['body'] = json_encode([
+            'error' => 'Invalid input'
+        ]);
+        return $response;
+    }
+
+    private function notFoundRequest(){
+        $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
+        $response['body'] = null;
+        return $response;
+    }
+
+
 }

@@ -36,7 +36,7 @@ class EmployeeGateway
                       FROM
                         employee
                       WHERE 
-                        id = ?";
+                        EMPLOYEE_ID = ?";
         try {
             $statement = $this->db->prepare($statement);
             $statement->execute(array($id));
@@ -50,16 +50,16 @@ class EmployeeGateway
         $statement = "INSERT INTO employee
                         (EMPLOYEE_ID,FIRSTNAME,LASTNAME,SHORTNAME,PASSWORD,ROLE)
                       VALUES
-                        (:personalId, :firstname, :lastname, :shortname, :password, :role)";
+                        (:personalId, :firstname, :lastname, :shortname, :password, :isadmin)";
         try {
             $statement = $this->db->prepare($statement);
             $statement->execute(array(
                 'personalId' => $insert['personalId'],
                 'firstname'  => $insert['firstname'],
-                'lastname' => $insert['lastname'],
-                'shortname' => $insert['shortname'],
-                'password' => $insert['password'],
-                'role' => $insert['role'],
+                'lastname' =>   $insert['lastname'],
+                'shortname' =>  $insert['shortname'],
+                'password' =>   $insert['password'],
+                'isadmin' =>    $insert['role'],
             ));
             return $statement->rowCount();
         } catch (\PDOException $e) {
@@ -76,7 +76,7 @@ class EmployeeGateway
                         PASSWORD =  :password,
                         ROLE =      :role 
                       WHERE
-                        id = :id";
+                        EMPLOYEE_ID = :personalId";
         try {
             $statement = $this->db->prepare($statement);
             $statement->execute([

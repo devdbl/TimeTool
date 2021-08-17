@@ -1,5 +1,5 @@
 <?php
-include_once ("../main/logic/Simple.php");
+include_once("../main/logic/Simple.php");
 class ProjectControllerTest extends \PHPUnit\Framework\TestCase
 {
     public function testDivide()
@@ -11,7 +11,7 @@ class ProjectControllerTest extends \PHPUnit\Framework\TestCase
     }
 
 
-    /*public function testDivideWithException()
+    /*api function testDivideWithException()
     {
         $simple = new Simple(10);
         $simple->divide(0);
