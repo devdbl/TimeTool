@@ -1,7 +1,8 @@
 <?php
 
-require_once("../models/ReportGateway.php");
+namespace app\controllers;
 
+use app\models\ReportGateway;
 
 class ReportController
 {
@@ -9,16 +10,18 @@ class ReportController
     private $requestMethod;
     private $projectId;
     private $userId;
+    private $dateArray = array();
     private $reportGateway;
 
 
-    public function __construct($db, $requestMethod, $projectId, $userId)
+    public function __construct($db, $requestMethod, $projectId, $userId, $dateArray)
     {
         $this->db = $db;
         $this->requestMethod = $requestMethod;
         $this->projectId = $projectId;
         $this->userId = $userId;
-        $this->reportGateway = new ReportGateway;
+        $this->dateArray = $dateArray;
+        $this->reportGateway = new ReportGateway($db);
     }
 
     public function processRequest(){
@@ -51,6 +54,7 @@ class ReportController
 
     private function addTimeReport(){
         //Der eingeloggt User will eine Buchung auf ein ausgewähltes bereits vorhandenes Projekt vornehmen
+
     }
 
     private function getTimeReport(){
@@ -69,20 +73,29 @@ class ReportController
         //Ein User will die letzten 100 erfassten Buchungen eines anderen User für ein bestimmtes Projekt sehen
     }
 
-    private function getTimeReportPeriod(){
-        //Der eingeloggte User will seine erfassten Buchungen in einem definierten Zeitraum sehen
+    private function validateReport($input){
+        if (! isset($input['firstname'])) {
+            $month = strtotime("-1 Month");
+            $input['startDate'] = date("Y-m-d",$month);
+        }
+        if (! isset($input['endDate'])) {
+            $input['endDate'] = date("Y-m-d");
+        }
+        return true;
     }
 
-    private function getTimeReportUserPeriod(){
-        //Ein User will die  Buchungen eines anderen User in einem definierten Zeitraum sehen
+    private function unprocessableEntityResponse(){
+        $response['status_code_header'] = 'HTTP/1.1 422 Unprocessable Entity';
+        $response['body'] = json_encode([
+            'error' => 'Invalid input'
+        ]);
+        return $response;
     }
 
-    private function getTimeReportProjectPeriod(){
-        // ein User will die erfassten Buchungen eines ausgewählten Projektes in einem definierten Zeitraum sehen
-    }
-
-    private function getTimeReportProjectUserPeriod(){
-        //Ein User will die erfassten Buchungen eines anderen User für ein bestimmtes Projekt in einem definierten Zeitraum sehen
+    private function notFoundRequest(){
+        $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
+        $response['body'] = null;
+        return $response;
     }
 
 }
