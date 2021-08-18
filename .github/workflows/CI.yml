@@ -1,6 +1,6 @@
 name: CI
 
-on: [push]
+on: [pull_request]
 
 jobs:
   build-test:
@@ -8,14 +8,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Update composer
+        run: composer update
 
-      - uses: php-actions/composer@v5
+      - name: Validate composer.json and composer.lock
+        run: composer validate
 
-      - name: PHPUnit Tests
-        uses: php-actions/phpunit@v3
-        env:
-          TEST_NAME: Scarlett
-        with:
-          bootstrap: vendor/autoload.php
-          configuration: test/phpunit.xml
-          args: --coverage-text
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run test suite
+        run: composer run-script testdox
