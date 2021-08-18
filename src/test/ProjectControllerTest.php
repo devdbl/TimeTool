@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-include_once("../main/logic/Simple.php");
+include_once("../main/tools/Simple.php");
 
  /**
      * @group UnitTest
