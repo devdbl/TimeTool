@@ -1,6 +1,4 @@
 {   
-	"name": "abbts/TimeTool",
-	"description": "Modularbeit2",
 	"require": {
 	    "twbs/bootstrap": "5.1.*",
 	    "phpunit/phpunit": "9.5.*",
