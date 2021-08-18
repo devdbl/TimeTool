@@ -10,7 +10,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: php-actions/composer@v5
     - name: PHP Unit Tests
-      uses: php-actions/phpunit@v3
+      uses: php-actions/phpunit@v9
       with:
         version: latest
         php_version: latest
