@@ -1,5 +1,9 @@
 <?php
 include_once("../main/logic/Simple.php");
+
+ /**
+     * @group UnitTest
+     */
 class ProjectControllerTest extends \PHPUnit\Framework\TestCase
 {
     public function testDivide()
