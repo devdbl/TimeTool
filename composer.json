@@ -1,16 +1,28 @@
 {   
-	"name": "devdbl/TimeTool",
-	"description": "Modularbeit2",
+	"name": "modulwork/timetool",
+	"type": "project",
+	"description": "Modularbeit",
+	"license": "LGPL-3.0-or-later",
+	"authors": [
+		{
+			"name": "D. Blattner",
+			"homepage": "https://github.com/devdbl"
+		},
+		{
+			"name": "sb",
+			"homepage": "https://github.com"
+		}
+	],
 	"require": {
 	    "twbs/bootstrap": "5.1.*",
-	    "phpunit/phpunit": "9.5.*",
-	    "phpunit/php-timer": "5.0.*",
 	    "monolog/monolog": "2.3.*",
 	    "webmozart/assert": "1.10.*",
 	    "ext-pdo": "*"
 	},
+	"require-dev": {
+		"phpunit/phpunit": "9.5.*"
+  	},
 	"scripts": {
             "unittest": "./vendor/bin/phpunit --testdox --colors=always src/test/"
-  	},
-  	"license": "MIT"
+  	}
 }
