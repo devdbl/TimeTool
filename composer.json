@@ -8,5 +8,9 @@
 	    "monolog/monolog": "2.3.*",
 	    "webmozart/assert": "1.10.*",
 	    "ext-pdo": "*"
-	}
+	},
+	"scripts": {
+            "unittest": "./vendor/bin/phpunit --testdox --colors=always src/test/"
+  	},
+  	"license": "MIT"
 }
