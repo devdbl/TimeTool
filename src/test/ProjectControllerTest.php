@@ -3,7 +3,12 @@ declare(strict_types=1);
 
 class ProjectControllerTest extends \PHPUnit\Framework\TestCase
 {
-    public function testDivide()
+    
+    
+    public function testAssertTrue(){
+        $this->assertTrue(true);
+    }
+    /*public function testDivide()
     {
         $simple = new src\main\tools\Simple(10);
         $result = $simple->divide(2);
@@ -12,7 +17,7 @@ class ProjectControllerTest extends \PHPUnit\Framework\TestCase
     }
 
 
-    /*api function testDivideWithException()
+    api function testDivideWithException()
     {
         $simple = new Simple(10);
         $simple->divide(0);
