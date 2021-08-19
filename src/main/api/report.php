@@ -1,8 +1,7 @@
 <?php
 
-namespace app\api;
-use app\controllers\ReportController;
-use DatabaseConnector;
+require_once("../controllers/ReportController.php");
+require_once("../tools/DatabaseConnector.php");
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -28,15 +27,15 @@ $userId = null;
 if (isset($_GET['userId'])){
     $userId = $_GET['userId'];
 }
-$stardDate = null;
+$dateArray['startDate'] = null;
 if (isset($_GET['startDate'])){
-    $stardDate = $_GET['startDate'];
+    $dateArray['startDate'] = $_GET['startDate'];
 }
-$endDate = null;
+$dateArray['endDate'] = null;
 if (isset($_GET['endDate'])){
-    $endDate = $_GET['endDate'];
+    $dateArray['endDate'] = $_GET['endDate'];
 }
-$dateArray = array($stardDate,$endDate);
+
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 

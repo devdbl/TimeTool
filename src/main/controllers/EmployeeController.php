@@ -4,20 +4,14 @@ require_once("../models/EmployeeGateway.php");
 
 class EmployeeController{
 
-    private $db;
+
     private $requestMethod;
     private $userId;
     private $employeeGateway;
 
-
-    /**
-     * @param $db
-     * @param $requestMethod
-     * @param $userId
-     */
+    
     public function __construct($db, $requestMethod, $userId)
     {
-        $this->db = $db;
         $this->requestMethod = $requestMethod;
         $this->userId = $userId;
         $this->employeeGateway = new EmployeeGateway($db);

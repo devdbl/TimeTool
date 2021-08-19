@@ -1,6 +1,5 @@
 <?php
 
-namespace app\models;
 
 class ReportGateway
 {
@@ -14,20 +13,19 @@ class ReportGateway
         $this->db = $db;
     }
 
-    public function selectAll($start,$end){
+    public function selectAll($dateArray){
         $statement = "SELECT
-                        PROJECT_ID,EMPLOYEE_ID,TIME,REPORTDATE 
+                        PROJECT_ID,EMPLOYEE_ID,`TIME`,REPORTDATE 
                       FROM
-                        time
+                        `time`
                       WHERE REPORTDATE
                       BETWEEN :start AND :end
-                      ORDER BY
-                        ID";
+                      ORDER BY ID";
         try {
-            $statement = $this->db->query($statement);
+            $statement = $this->db->prepare($statement);
             $statement->execute(array(
-                'start' => $start,
-                'end'   => $end
+                'start' => $dateArray['startDate'],
+                'end'   => $dateArray['endDate']
             ));
             return $statement->fetchAll(\PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
@@ -35,7 +33,7 @@ class ReportGateway
         }
     }
 
-    public function selectReportUser($start,$end,$userId){
+    public function selectReportUser($dateArray,$userId){
         $statement = "SELECT
                         PROJECT_ID,EMPLOYEE_ID,TIME,REPORTDATE 
                       FROM
@@ -45,10 +43,10 @@ class ReportGateway
                       ORDER BY
                         ID";
         try {
-            $statement = $this->db->query($statement);
+            $statement = $this->db->prepare($statement);
             $statement->execute(array(
-                'start' => $start,
-                'end'   => $end,
+                'start' => $dateArray['startDate'],
+                'end'   => $dateArray['endDate'],
                 'userId'=> $userId
             ));
             return $statement->fetchAll(\PDO::FETCH_ASSOC);
@@ -57,7 +55,7 @@ class ReportGateway
         }
     }
 
-    public function selectReportProject($start, $end, $projectId){
+    public function selectReportProject($dateArray, $projectId){
         $statement = "SELECT
                         PROJECT_ID,EMPLOYEE_ID,TIME,REPORTDATE 
                       FROM
@@ -67,10 +65,10 @@ class ReportGateway
                       ORDER BY
                         ID";
         try {
-            $statement = $this->db->query($statement);
+            $statement = $this->db->prepare($statement);
             $statement->execute(array(
-                'start' => $start,
-                'end'   => $end,
+                'start' => $dateArray['startDate'],
+                'end'   => $dateArray['endDate'],
                 'projectId'=> $projectId
             ));
             return $statement->fetchAll(\PDO::FETCH_ASSOC);
@@ -79,7 +77,7 @@ class ReportGateway
         }
     }
 
-    public function selectReportProjectUser($start, $end, $projectId, $userId){
+    public function selectReportProjectUser($dateArray, $projectId, $userId){
         $statement = "SELECT
                         PROJECT_ID,EMPLOYEE_ID,TIME,REPORTDATE 
                       FROM
@@ -89,10 +87,10 @@ class ReportGateway
                       ORDER BY
                         ID";
         try {
-            $statement = $this->db->query($statement);
+            $statement = $this->db->prepare($statement);
             $statement->execute(array(
-                'start'     => $start,
-                'end'       => $end,
+                'start' => $dateArray['startDate'],
+                'end'   => $dateArray['endDate'],
                 'projectId' => $projectId,
                 'userId'    => $userId
             ));

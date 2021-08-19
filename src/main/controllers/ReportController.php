@@ -1,22 +1,18 @@
 <?php
 
-namespace app\controllers;
-
-use app\models\ReportGateway;
+require_once("../models/ReportGateway.php");
 
 class ReportController
 {
-    private $db;
     private $requestMethod;
     private $projectId;
     private $userId;
-    private $dateArray = array();
+    private $dateArray;
     private $reportGateway;
 
 
     public function __construct($db, $requestMethod, $projectId, $userId, $dateArray)
     {
-        $this->db = $db;
         $this->requestMethod = $requestMethod;
         $this->projectId = $projectId;
         $this->userId = $userId;
@@ -54,34 +50,71 @@ class ReportController
 
     private function addTimeReport(){
         //Der eingeloggt User will eine Buchung auf ein ausgewähltes bereits vorhandenes Projekt vornehmen
-
+        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+        $this->reportGateway->add($input);
+        $response['status_code_header'] = 'HTTP/1.1 201 Created';
+        $response['body'] = null;
+        return $response;
     }
 
     private function getTimeReport(){
-        //Der eingeloggte User will seine erfassten Buchungen letzte 100 einträge
+        //Der eingeloggte User will seine erfassten Buchungen letzte 100 einträge anzeigen
+        $this->dateArray = $this->validateReport($this->dateArray);
+        $result = $this->reportGateway->selectAll($this->dateArray);
+        if (! $result) {
+            return $this->notFoundRequest();
+        }
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
     }
 
-    private function getTimeReportUser(){
+    private function getTimeReportUser($userId){
         //Ein User will die letzten 100 Buchungen eines anderen User sehen
+        $this->dateArray = $this->validateReport($this->dateArray);
+        $result = $this->reportGateway->selectReportUser($this->dateArray,$userId);
+        if (! $result) {
+            return $this->notFoundRequest();
+        }
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
+
     }
 
-    private function getTimeReportProject(){
+    private function getTimeReportProject($projectId){
         // ein User will die letzten 100 erfassten Buchungen eines ausgewählten Projektes
+        $this->dateArray = $this->validateReport($this->dateArray);
+        $result = $this->reportGateway->selectReportProject($this->dateArray,$projectId);
+        if (! $result) {
+            return $this->notFoundRequest();
+        }
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
     }
 
-    private function getTimeReportProjectUser(){
+    private function getTimeReportProjectUser($projectId, $userId){
         //Ein User will die letzten 100 erfassten Buchungen eines anderen User für ein bestimmtes Projekt sehen
+        $this->dateArray = $this->validateReport($this->dateArray);
+        $result = $this->reportGateway->selectReportProjectUser($this->dateArray[0], $this->dateArray[1],$projectId,$userId);
+        if (! $result) {
+            return $this->notFoundRequest();
+        }
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
     }
 
     private function validateReport($input){
-        if (! isset($input['firstname'])) {
+        if (! isset($input['startDate'])) {
             $month = strtotime("-1 Month");
             $input['startDate'] = date("Y-m-d",$month);
         }
         if (! isset($input['endDate'])) {
             $input['endDate'] = date("Y-m-d");
         }
-        return true;
+        return $input;
     }
 
     private function unprocessableEntityResponse(){
