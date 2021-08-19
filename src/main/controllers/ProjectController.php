@@ -16,9 +16,9 @@ class ProjectController
     {
         $this->db = new DatabaseController();
         $valid = new Validation();
-        $this->ProjectId = $valid->testInput((isset($_POST["ProjectID"])&& is_numeric($_POST["ProjectID"])) ? $_POST["ProjectID"] : "") ;
-        $this->ProjectName = $valid->testInput((isset($_POST["ProjectName"])&& is_string($_POST["ProjectName"])) ? $_POST["ProjectName"] : "");
-        $this->ProjectDescription = $valid->testInput((isset($_POST["ProjectDescription"])&& is_string($_POST["ProjectDescription"])) ? $_POST["ProjectDescription"] : "");
+        $this->ProjectId = $valid->validateInput((isset($_POST["ProjectID"])&& is_numeric($_POST["ProjectID"])) ? $_POST["ProjectID"] : "") ;
+        $this->ProjectName = $valid->validateInput((isset($_POST["ProjectName"])&& is_string($_POST["ProjectName"])) ? $_POST["ProjectName"] : "");
+        $this->ProjectDescription = $valid->validateInput((isset($_POST["ProjectDescription"])&& is_string($_POST["ProjectDescription"])) ? $_POST["ProjectDescription"] : "");
     }
 
     public function newProject(){
