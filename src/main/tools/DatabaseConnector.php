@@ -1,5 +1,6 @@
 <?php
 
+
 class DatabaseConnector {
 
     private $dbConnection = null;
