@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once("../main/tools/Validation.php");
+require_once("src/main/tools/Validation.php");
 
 class ValidationTest extends TestCase
 {
