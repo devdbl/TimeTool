@@ -23,6 +23,6 @@
 		"phpunit/phpunit": "9.5.*"
   	},
 	"scripts": {
-            "unittest": "./vendor/bin/phpunit --testdox --colors=always src/test"
+            "unittest": "./vendor/bin/phpunit --testdox --colors=always src/"
   	}
 }
