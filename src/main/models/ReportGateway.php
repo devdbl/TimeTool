@@ -1,6 +1,5 @@
 <?php
 
-
 class ReportGateway
 {
     private $db = null;

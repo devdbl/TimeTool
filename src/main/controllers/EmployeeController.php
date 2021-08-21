@@ -1,5 +1,5 @@
 <?php
-require_once("../models/User.php");
+
 require_once("../models/EmployeeGateway.php");
 
 class EmployeeController{

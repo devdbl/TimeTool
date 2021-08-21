@@ -1,43 +1,137 @@
 <?php
 
-require_once("../controllers/DatabaseController.php");
-require_once("../controllers/Validation.php");
+require_once("../models/ProjectGateway.php");
+
+class ProjectController{
 
 
+    private $requestMethod;
+    private $getDeactivatedProjects;
+    private $projectId;
+    private $projectGateway;
 
-class ProjectController
-{
-    private DatabaseController $db;
-    private $ProjectId;
-    private $ProjectName;
-    private $ProjectDescription;
 
-    public function __construct()
+    public function __construct($db, $requestMethod, $projectId, $getDeactivatedProjects)
     {
-        $this->db = new DatabaseController();
-        $valid = new Validation();
-        $this->ProjectId = $valid->validateInput((isset($_POST["ProjectID"])&& is_numeric($_POST["ProjectID"])) ? $_POST["ProjectID"] : "") ;
-        $this->ProjectName = $valid->validateInput((isset($_POST["ProjectName"])&& is_string($_POST["ProjectName"])) ? $_POST["ProjectName"] : "");
-        $this->ProjectDescription = $valid->validateInput((isset($_POST["ProjectDescription"])&& is_string($_POST["ProjectDescription"])) ? $_POST["ProjectDescription"] : "");
+        $this->requestMethod = $requestMethod;
+        $this->projectId = $projectId;
+        $this->getDeactivatedProjects = $getDeactivatedProjects;
+        $this->projectGateway = new ProjectGateway($db);
     }
 
-    public function newProject(){
-        $query = "INSERT INTO `project` (`PROJECT_ID`, `PROJECTNAME`, `DESCRIPTION`) VALUES
-                  ($this->Project->getProjectId(),'$this->ProjectName','$this->ProjectDescription')";
-        $this->db->UpdateDB($query);
+    public function processRequest(){
+        switch($this->requestMethod){
+            case 'GET':
+                if($this->projectId){
+                    $response = $this->getProject($this->projectId);
+                }elseif($this->getDeactivatedProjects){
+                    $response = $this->getAllProjects();
+                }else{
+                    $response = $this->getAllActiveProjects();
+                }
+                break;
+            case 'POST':
+                $response = $this->createProject();
+                break;
+            case 'PUT':
+                $response = $this->updateProject($this->projectId);
+                break;
+            case 'DELETE':
+                $response = $this->deleteProject($this->projectId);
+                break;
+            default:
+                $response = $this->notFoundRequest();
+                break;
+        }
+        header($response['status_code_header']);
+        if ($response['body']) {
+            echo $response['body'];
+        }
     }
 
-    public function editProject(){
-
-        $query = "UPDATE `timetool`.`project` 
-                  SET 
-                    `PROJECTNAME` = '$this->ProjectName',
-                    `DESCRIPTION` = '$this->ProjectDescription' 
-                  WHERE (`PROJECT_ID` = $this->ProjectId)";
-        $this->db->UpdateDb($query);
+    private function getAllProjects(){
+        $result = $this->projectGateway->selectAll();
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
     }
 
-    public function deactivateProject(){
+    private function getAllActiveProjects(){
+        $result = $this->projectGateway->selectAllActive();
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
 
+    }
+
+    private function getProject($id){
+        $result = $this->projectGateway->selectProject($id);
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
+    }
+
+    private function createProject(){
+        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+        if (! $this->validateProject($input)) {
+            return $this->unprocessableEntityResponse();
+        }
+        $this->projectGateway->add($input);
+        $response['status_code_header'] = 'HTTP/1.1 201 Created';
+        $response['body'] = null;
+        return $response;
+    }
+
+    private function updateProject($id){
+        $result = $this->projectGateway->selectProject($id);
+        if (! $result) {
+            return $this->notFoundRequest();
+        }
+        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+        if (! $this->validateProjectUpdate($input)) {
+            return $this->unprocessableEntityResponse();
+        }
+        $this->projectGateway->update($id, $input);
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = null;
+        return $response;
+    }
+
+    private function deleteProject($id){
+        echo "Funktioniert nicht: es wäre das Projekt mit der Projektnummer ".$id. " gelöscht worden";
+    }
+
+    private function validateProject($input){
+        if (! isset($input['projectId'])) {
+            return false;
+        }
+        if (! isset($input['projectname'])) {
+            return false;
+        }
+        return true;
+    }
+
+    private function validateProjectUpdate($input){
+        if (! isset($input['projectname'])) {
+            return false;
+        }
+        if (! isset($input['isActive'])) {
+            return false;
+        }
+        return true;
+    }
+
+    private function unprocessableEntityResponse(){
+        $response['status_code_header'] = 'HTTP/1.1 422 Unprocessable Entity';
+        $response['body'] = json_encode([
+            'error' => 'Invalid input'
+        ]);
+        return $response;
+    }
+
+    private function notFoundRequest(){
+        $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
+        $response['body'] = null;
+        return $response;
     }
 }

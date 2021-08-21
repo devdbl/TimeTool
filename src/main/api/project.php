@@ -1,5 +1,6 @@
 <?php
-require_once("../controllers/EmployeeController.php");
+
+require_once("../controllers/ProjectController.php");
 require_once("../tools/DatabaseConnector.php");
 
 header("Access-Control-Allow-Origin: *");
@@ -11,18 +12,24 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode( '/', $uri );
 
-if ($uri[2] !== 'employee.php') {
+if ($uri[2] !== 'project.php') {
     header("HTTP/1.1 404 Not Found");
     exit();
 }
 
-$userId = null;
-if (isset($uri[3])) {
-    $userId = (int) $uri[3];
+$projectId = null;
+if (isset($_GET['id'])) {
+    $projectId = $_GET['id'];
+}
+
+$getDeactivatedProjects = null;
+if (isset($_GET['getDeactivatedProjects'])){
+    $getDeactivatedProjects = $_GET['getDeactivatedProjects'];
 }
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 $dbConnection = (new DatabaseConnector())->connect();
 
-$employeeController = new EmployeeController($dbConnection,$requestMethod,$userId);
-$employeeController->processRequest();
+$projectController = new ProjectController($dbConnection, $requestMethod, $projectId, $getDeactivatedProjects);
+$projectController->processRequest();
+
