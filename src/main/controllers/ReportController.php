@@ -36,8 +36,8 @@ class ReportController
             case 'POST':
                 $response = $this->addTimeReport();
                 break;
-            case 'DELETE':
-                break;
+            /*case 'DELETE':
+                break;*/
             default:
                 $response = $this->notFoundRequest();
                 break;
@@ -59,7 +59,7 @@ class ReportController
 
     private function getTimeReport(){
         //Der eingeloggte User will seine erfassten Buchungen letzte 100 einträge anzeigen
-        $this->dateArray = $this->validateReport($this->dateArray);
+        $this->dateArray = $this->validateDate($this->dateArray);
         $result = $this->reportGateway->selectAll($this->dateArray);
         if (! $result) {
             return $this->notFoundRequest();
@@ -71,7 +71,7 @@ class ReportController
 
     private function getTimeReportUser($userId){
         //Ein User will die letzten 100 Buchungen eines anderen User sehen
-        $this->dateArray = $this->validateReport($this->dateArray);
+        $this->dateArray = $this->validateDate($this->dateArray);
         $result = $this->reportGateway->selectReportUser($this->dateArray,$userId);
         if (! $result) {
             return $this->notFoundRequest();
@@ -84,7 +84,7 @@ class ReportController
 
     private function getTimeReportProject($projectId){
         // ein User will die letzten 100 erfassten Buchungen eines ausgewählten Projektes
-        $this->dateArray = $this->validateReport($this->dateArray);
+        $this->dateArray = $this->validateDate($this->dateArray);
         $result = $this->reportGateway->selectReportProject($this->dateArray,$projectId);
         if (! $result) {
             return $this->notFoundRequest();
@@ -96,7 +96,7 @@ class ReportController
 
     private function getTimeReportProjectUser($projectId, $userId){
         //Ein User will die letzten 100 erfassten Buchungen eines anderen User für ein bestimmtes Projekt sehen
-        $this->dateArray = $this->validateReport($this->dateArray);
+        $this->dateArray = $this->validateDate($this->dateArray);
         $result = $this->reportGateway->selectReportProjectUser($this->dateArray[0], $this->dateArray[1],$projectId,$userId);
         if (! $result) {
             return $this->notFoundRequest();
@@ -106,7 +106,7 @@ class ReportController
         return $response;
     }
 
-    private function validateReport($input){
+    private function validateDate($input){
         if (! isset($input['startDate'])) {
             $month = strtotime("-1 Month");
             $input['startDate'] = date("Y-m-d",$month);
