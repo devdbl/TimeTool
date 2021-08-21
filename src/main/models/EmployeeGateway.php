@@ -1,6 +1,5 @@
 <?php
 
-
 class EmployeeGateway
 {
     private $db = null;
@@ -46,7 +45,7 @@ class EmployeeGateway
         }
     }
 
-    public function add(Array $insert){
+    public function add(Array $input){
         $statement = "INSERT INTO employee
                         (EMPLOYEE_ID,FIRSTNAME,LASTNAME,SHORTNAME,PASSWORD,ROLE)
                       VALUES
@@ -54,12 +53,12 @@ class EmployeeGateway
         try {
             $statement = $this->db->prepare($statement);
             $statement->execute(array(
-                'personalId' => $insert['personalId'],
-                'firstname'  => $insert['firstname'],
-                'lastname' =>   $insert['lastname'],
-                'shortname' =>  $insert['shortname'],
-                'password' =>   $insert['password'],
-                'isadmin' =>    $insert['role'],
+                'personalId' => $input['personalId'],
+                'firstname'  => $input['firstname'],
+                'lastname' =>   $input['lastname'],
+                'shortname' =>  $input['shortname'],
+                'password' =>   $input['password'],
+                'isadmin' =>    $input['role'],
             ));
             return $statement->rowCount();
         } catch (\PDOException $e) {
@@ -67,7 +66,7 @@ class EmployeeGateway
         }
     }
 
-    public function update($personalId,Array $insert){
+    public function update($personalId,Array $input){
         $statement = "UPDATE employee
                       SET
                         FIRSTNAME = :firstname,
@@ -81,11 +80,11 @@ class EmployeeGateway
             $statement = $this->db->prepare($statement);
             $statement->execute([
                 'personalId' => (int) $personalId,
-                'firstname'  => $insert['firstname'],
-                'lastname' => $insert['lastname'],
-                'shortname' => $insert['shortname'],
-                'password' => $insert['password'],
-                'role' => $insert['role'],
+                'firstname'  => $input['firstname'],
+                'lastname' => $input['lastname'],
+                'shortname' => $input['shortname'],
+                'password' => $input['password'],
+                'role' => $input['role'],
             ]);
             return $statement->rowCount();
         } catch (\PDOException $e) {
