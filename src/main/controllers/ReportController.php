@@ -36,8 +36,8 @@ class ReportController
             case 'POST':
                 $response = $this->addTimeReport();
                 break;
-            case 'DELETE':
-                break;
+            /*case 'DELETE':
+                break;*/
             default:
                 $response = $this->notFoundRequest();
                 break;
