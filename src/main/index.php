@@ -39,6 +39,7 @@ if (!$userInfo) {
 
     </body>
 </html>';
+
 }
 ?>
 <?php if(!$userInfo): ?>

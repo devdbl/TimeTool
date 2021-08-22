@@ -13,7 +13,23 @@ $auth0 = new Auth0([
     'scope' => 'openid profile email',
 ]);
 
-$auth0->logout();
+$userInfo = $auth0->getUser();
+
+echo '
+    <!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+        <title>LandingPage</title>
+        <link rel="stylesheet" href="./views/css/app.css">
+
+    </head>
+    <body>';
 
 echo '<b>bye-bye</b><br>';
+echo '<b>'.$userInfo['email'].'</b>';
 echo '<a href="index.php">LandingPage</a>';
+
+echo '</body>
+</html>';
+$auth0->logout();
