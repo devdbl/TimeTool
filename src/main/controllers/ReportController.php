@@ -97,7 +97,7 @@ class ReportController
     private function getTimeReportProjectUser($projectId, $userId){
         //Ein User will die letzten 100 erfassten Buchungen eines anderen User für ein bestimmtes Projekt sehen
         $this->dateArray = $this->validateDate($this->dateArray);
-        $result = $this->reportGateway->selectReportProjectUser($this->dateArray[0], $this->dateArray[1],$projectId,$userId);
+        $result = $this->reportGateway->selectReportProjectUser($this->dateArray,$projectId,$userId);
         if (! $result) {
             return $this->notFoundRequest();
         }
