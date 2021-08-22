@@ -49,7 +49,6 @@ class ReportController
     }
 
     private function addTimeReport(){
-        //Der eingeloggt User will eine Buchung auf ein ausgewähltes bereits vorhandenes Projekt vornehmen
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
         $this->reportGateway->add($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
@@ -58,7 +57,6 @@ class ReportController
     }
 
     private function getTimeReport(){
-        //Der eingeloggte User will seine erfassten Buchungen letzte 100 einträge anzeigen
         $this->dateArray = $this->validateDate($this->dateArray);
         $result = $this->reportGateway->selectAll($this->dateArray);
         if (! $result) {
@@ -70,7 +68,6 @@ class ReportController
     }
 
     private function getTimeReportUser($userId){
-        //Ein User will die letzten 100 Buchungen eines anderen User sehen
         $this->dateArray = $this->validateDate($this->dateArray);
         $result = $this->reportGateway->selectReportUser($this->dateArray,$userId);
         if (! $result) {
@@ -83,7 +80,6 @@ class ReportController
     }
 
     private function getTimeReportProject($projectId){
-        // ein User will die letzten 100 erfassten Buchungen eines ausgewählten Projektes
         $this->dateArray = $this->validateDate($this->dateArray);
         $result = $this->reportGateway->selectReportProject($this->dateArray,$projectId);
         if (! $result) {
@@ -95,7 +91,6 @@ class ReportController
     }
 
     private function getTimeReportProjectUser($projectId, $userId){
-        //Ein User will die letzten 100 erfassten Buchungen eines anderen User für ein bestimmtes Projekt sehen
         $this->dateArray = $this->validateDate($this->dateArray);
         $result = $this->reportGateway->selectReportProjectUser($this->dateArray[0], $this->dateArray[1],$projectId,$userId);
         if (! $result) {
