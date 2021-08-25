@@ -1,6 +1,5 @@
 ### VS Code ###
 .vscode/
 vendor/
-.idea
 .phpunit.result.cache
 .env
