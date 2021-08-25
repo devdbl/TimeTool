@@ -32,7 +32,7 @@ class ReportGateway
         }
     }
 
-    public function selectReportUser($dateArray,$userId){
+    public function selectReportUser($dateArray, $userId){
         $statement = "SELECT
                         PROJECT_ID,EMPLOYEE_ID,TIME,REPORTDATE 
                       FROM
@@ -41,6 +41,27 @@ class ReportGateway
                       AND EMPLOYEE_ID = :userId
                       ORDER BY
                         ID";
+        try {
+            $statement = $this->db->prepare($statement);
+            $statement->execute(array(
+                'start' => $dateArray['startDate'],
+                'end'   => $dateArray['endDate'],
+                'userId'=> $userId
+            ));
+            return $statement->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            exit($e->getMessage());
+        }
+    }
+
+    public function selectReportUserOverview($dateArray, $userId){
+        $statement = "SELECT
+                        PROJECT_ID,EMPLOYEE_ID,SUM(TIME) 
+                      FROM
+                        time
+                      WHERE (REPORTDATE BETWEEN :start AND :end)
+                      AND EMPLOYEE_ID = :userId
+                      GROUP BY PROJECT_ID";
         try {
             $statement = $this->db->prepare($statement);
             $statement->execute(array(
@@ -63,6 +84,27 @@ class ReportGateway
                       AND PROJECT_ID = :projectId
                       ORDER BY
                         ID";
+        try {
+            $statement = $this->db->prepare($statement);
+            $statement->execute(array(
+                'start' => $dateArray['startDate'],
+                'end'   => $dateArray['endDate'],
+                'projectId'=> $projectId
+            ));
+            return $statement->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            exit($e->getMessage());
+        }
+    }
+
+    public function selectReportProjectOverview($dateArray, $projectId){
+        $statement = "SELECT
+                        PROJECT_ID,EMPLOYEE_ID,SUM(TIME) 
+                      FROM
+                        time
+                      WHERE (REPORTDATE BETWEEN :start AND :end)
+                      AND PROJECT_ID = :projectId
+                      GROUP BY EMPLOYEE_ID";
         try {
             $statement = $this->db->prepare($statement);
             $statement->execute(array(
