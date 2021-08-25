@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e093998e-49d9-4d65-849e-9fd060312824" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/login.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/logout.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +180,7 @@
       <workItem from="1629820775658" duration="585000" />
       <workItem from="1629821385591" duration="3075000" />
       <workItem from="1629874707470" duration="20000" />
-      <workItem from="1629874747902" duration="1827000" />
+      <workItem from="1629874747902" duration="4024000" />
     </task>
     <servers />
   </component>
@@ -221,14 +217,9 @@
           <line>21</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/main/login.php</url>
-          <line>6</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/src/main/controllers/ReportController.php</url>
-          <line>81</line>
+          <line>84</line>
           <properties>
             <option name="className" value="\ReportController" />
             <option name="methodName" value="getTimeReportProject" />
@@ -237,7 +228,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/src/main/controllers/ReportController.php</url>
-          <line>69</line>
+          <line>71</line>
           <properties>
             <option name="className" value="\ReportController" />
             <option name="methodName" value="getTimeReportUser" />

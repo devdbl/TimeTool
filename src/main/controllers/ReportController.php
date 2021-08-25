@@ -92,7 +92,7 @@ class ReportController
 
     private function getTimeReportProjectUser($projectId, $userId){
         $this->dateArray = $this->validateDate($this->dateArray);
-        $result = $this->reportGateway->selectReportProjectUser($this->dateArray[0], $this->dateArray[1],$projectId,$userId);
+        $result = $this->reportGateway->selectReportProjectUser($this->dateArray,$projectId,$userId);
         if (! $result) {
             return $this->notFoundRequest();
         }
