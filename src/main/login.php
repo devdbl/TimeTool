@@ -15,6 +15,7 @@ if(isset($_GET['login'])) {
     //Überprüfung des Passworts
     if ($user !== false && password_verify($passwort, $user['PASSWORD'])) {
         $_SESSION['userid'] = $user['EMPLOYEE_ID'];
+        $_SESSION['isAdmin']= $user['ROLE'];
         die('Login erfolgreich. Weiter zu <a href="index.php">internen Bereich</a>');
     } else {
         $errorMessage = "Kürzel oder Passwort war ungültig<br>";
@@ -26,6 +27,7 @@ if(isset($_GET['login'])) {
     <html>
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="./views/css/app.css">
 </head>
 <body>
 

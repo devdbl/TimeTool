@@ -1,15 +1,18 @@
 <?php
 session_start();
-if(!isset($_SESSION['userid'])) {
-    die('Bitte zuerst <a href="login.php">einloggen</a>');
-}else {
-    echo '<html>
+?>
+<html>
     <head>
     <meta charset="UTF-8">
         <title>LandingPage</title>
         <link rel="stylesheet" href="./views/css/app.css">
 
     </head>
+<?php
+if(!isset($_SESSION['userid'])) {
+    die('Bitte zuerst <a href="login.php">einloggen</a>');
+}else {
+    echo '
     <body>
         <h1>Welcome to TimeTool</h1>
         </br>
