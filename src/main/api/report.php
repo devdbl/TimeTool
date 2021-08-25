@@ -35,11 +35,15 @@ $dateArray['endDate'] = null;
 if (isset($_GET['endDate'])){
     $dateArray['endDate'] = $_GET['endDate'];
 }
+$overview = null;
+if (isset($_GET['overview'])){
+    $overview = $_GET['overview'];
+}
 
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
 $dbConnection = (new DatabaseConnector())->connect();
 
-$reportController = new ReportController($dbConnection, $requestMethod, $projectId, $userId, $dateArray);
+$reportController = new ReportController($dbConnection, $requestMethod, $projectId, $userId, $dateArray, $overview);
 $reportController->processRequest();
