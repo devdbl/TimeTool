@@ -15,7 +15,8 @@ if(!isset($_SESSION['userid'])) {
         </br>
         <a href="views/html/NewProjectForm.html">Neues Projekt</a> </br></br>
         <a href="views/html/EditProject.html">Edit Projekt</a> </br><br>
-        <a href="views/html/User.html">Mitarbeiterverwalten</a> </br><br>
+        <a href="views/html/User.html">Mitarbeiterverwalten</a> </br><br><br><br><br><br><br><br>
+        <a href="logout.php">Ausloggen</a> </br><br>
 
     </body>
 </html>';
