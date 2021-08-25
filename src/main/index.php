@@ -1,5 +1,9 @@
-<!DOCTYPE html>
-<html>
+<?php
+session_start();
+if(!isset($_SESSION['userid'])) {
+    die('Bitte zuerst <a href="login.php">einloggen</a>');
+}else {
+    echo '<html>
     <head>
     <meta charset="UTF-8">
         <title>LandingPage</title>
@@ -14,4 +18,5 @@
         <a href="views/html/User.html">Mitarbeiterverwalten</a> </br><br>
 
     </body>
-</html>
+</html>';
+}
