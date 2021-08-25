@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e093998e-49d9-4d65-849e-9fd060312824" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/models/ReportGateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/models/ReportGateway.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +183,8 @@
       <workItem from="1629820775658" duration="585000" />
       <workItem from="1629821385591" duration="3075000" />
       <workItem from="1629874707470" duration="20000" />
-      <workItem from="1629874747902" duration="4024000" />
+      <workItem from="1629874747902" duration="4478000" />
+      <workItem from="1629882884361" duration="792000" />
     </task>
     <servers />
   </component>
@@ -213,11 +215,6 @@
           <url>file://$PROJECT_DIR$/src/main/controllers/ProjectController.php</url>
           <line>89</line>
           <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/main/api/report.php</url>
-          <line>21</line>
-          <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/src/main/controllers/ReportController.php</url>
