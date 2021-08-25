@@ -77,14 +77,13 @@ class ReportGateway
     }
 
     public function selectReportProjectUser($dateArray, $projectId, $userId){
-        $statement = "SELECT
-                        PROJECT_ID,EMPLOYEE_ID,TIME,REPORTDATE 
+        $statement = "SELECT 
+                        PROJECT_ID,EMPLOYEE_ID,SUM(TIME)
                       FROM
                         time
                       WHERE (REPORTDATE BETWEEN :start AND :end)
                       AND EMPLOYEE_ID = :userId AND PROJECT_ID = :projectId
-                      ORDER BY
-                        ID";
+                      ";
         try {
             $statement = $this->db->prepare($statement);
             $statement->execute(array(
