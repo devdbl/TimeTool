@@ -33,6 +33,13 @@
     justify-content: right;
 }
 
+ /* Bild Logo*/
+ .logologin {
+  position: relative;
+    
+    display: flex;
+    justify-content: right;
+}
 
   /* Style sidebar links */
   .sidebar a {
