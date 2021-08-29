@@ -186,8 +186,10 @@
       <workItem from="1629820775658" duration="585000" />
       <workItem from="1629821385591" duration="3075000" />
       <workItem from="1629874707470" duration="20000" />
-      <workItem from="1629874747902" duration="4024000" />
-      <workItem from="1630239142324" duration="10484000" />
+
+      <workItem from="1629874747902" duration="4478000" />
+      <workItem from="1629882884361" duration="792000" />
+
     </task>
     <servers />
   </component>
@@ -219,24 +221,8 @@
           <line>89</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="php-line-method">
-          <url>file://$PROJECT_DIR$/src/main/controllers/ReportController.php</url>
-          <line>84</line>
-          <properties>
-            <option name="className" value="\ReportController" />
-            <option name="methodName" value="getTimeReportProject" />
-          </properties>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php-line-method">
-          <url>file://$PROJECT_DIR$/src/main/controllers/ReportController.php</url>
-          <line>71</line>
-          <properties>
-            <option name="className" value="\ReportController" />
-            <option name="methodName" value="getTimeReportUser" />
-          </properties>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
+
+
       </breakpoints>
     </breakpoint-manager>
   </component>
