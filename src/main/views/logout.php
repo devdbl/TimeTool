@@ -1,7 +1,7 @@
 <?php
 require_once ("Helper.php");
 $helper = new Helper();
-$header = $helper->getHeader("Login");
+$header = $helper->getHeader("Logout");
 $navbar = $helper->getNavbar();
 $footer = $helper->getFooter();
 
