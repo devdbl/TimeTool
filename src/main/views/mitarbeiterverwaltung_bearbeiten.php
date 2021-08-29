@@ -1,5 +1,8 @@
 <?php
 require_once ("Helper.php");
+
+session_start();
+
 $helper = new Helper();
 $header = $helper->getHeader("Mitarbeiter verwalten");
 $navbar = $helper->getNavbar();
