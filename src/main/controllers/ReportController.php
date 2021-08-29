@@ -83,6 +83,7 @@ class ReportController
 
     }
 
+
     private function getTimeReportProject(){
         $this->dateArray = $this->validateDate($this->dateArray);
         if($this->overview == 1){
