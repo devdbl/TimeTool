@@ -10,5 +10,7 @@ session_destroy();
 
 echo $header;
 echo $navbar;
-echo '<div class = "text">Logout erfolgreich</div>';
+echo '<div class = "text">Logout erfolgreich<br>
+      <a href="index.php">Landing Page</a>
+      </div>';
 echo $footer;
