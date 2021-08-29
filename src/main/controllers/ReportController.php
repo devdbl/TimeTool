@@ -10,6 +10,8 @@ class ReportController
     private $dateArray;
     private $reportGateway;
 
+    public $dataArray;
+
 
     public function __construct($db, $requestMethod, $projectId, $userId, $dateArray)
     {
@@ -36,6 +38,9 @@ class ReportController
             case 'POST':
                 $response = $this->addTimeReport();
                 break;
+            case 'WEB':
+                $response = $this->getTimeReportWeb();
+                break;
             default:
                 $response = $this->notFoundRequest();
                 break;
@@ -43,6 +48,8 @@ class ReportController
         header($response['status_code_header']);
         if ($response['body']) {
             echo $response['body'];
+        }elseif ($response['web']){
+            $this->dataArray = $response['web'];
         }
     }
 
@@ -62,6 +69,16 @@ class ReportController
         }
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
+        return $response;
+    }
+
+    private function getTimeReportWeb(){
+        $this->dateArray = $this->validateDate($this->dateArray);
+        $result = $this->reportGateway->selectAll($this->dateArray);
+        if (! $result) {
+            return $this->notFoundRequest();
+        }
+        $response['web'] = $result;
         return $response;
     }
 
