@@ -1,26 +1,27 @@
 <?php
+require_once ("./views/Helper.php");
+
 session_start();
-?>
-<html>
-    <head>
-    <meta charset="UTF-8">
-        <title>LandingPage</title>
-        <link rel="stylesheet" href="./views/css/app.css">
 
-    </head>
-<?php
+$helper = new Helper();
+$header = $helper->getHeader("LandingPage");
+$navbar = $helper->getNavbar();
+$sidebar = $helper->getSidebar();
+$footer = $helper->getFooter();
+
+
+
+echo $header;
+echo $navbar;
+
 if(!isset($_SESSION['userid'])) {
-    die('Bitte zuerst <a href="login.php">einloggen</a>');
+    die('<div class = "text">Bitte zuerst <a href="./views/login.php">einloggen</a></div>');
 }else {
-    echo '
-    <body>
-        <h1>Welcome to TimeTool</h1>
-        </br>
-        <a href="views/html/NewProjectForm.html">Neues Projekt</a> </br></br>
-        <a href="views/html/EditProject.html">Edit Projekt</a> </br><br>
-        <a href="views/html/User.html">Mitarbeiterverwalten</a> </br><br><br><br><br><br><br><br>
-        <a href="logout.php">Ausloggen</a> </br><br>
-
-    </body>
-</html>';
+    echo $sidebar;
+    echo '  <div class="inhalt">
+                <h1>Herzlich Willkommen</h1>
+                <p>'.$_SESSION['name'].'</p>
+   
+            </div>';
 }
+echo $footer;
