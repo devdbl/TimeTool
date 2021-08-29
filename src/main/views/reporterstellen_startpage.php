@@ -1,80 +1,85 @@
-<!DOCTYPE html>
-<html lang="de">
+<?php
+require_once("../controllers/ReportController.php");
+require_once("../tools/DatabaseConnector.php");
+require_once("Helper.php");
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="layout.css" type="text/css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <title>Project Time Tool Report Startseite</title>
-</head>
+session_start();
 
-<body>
-    
+$helper = new Helper();
+$header = $helper->getHeader("Bericht erstellen");
+$navbar = $helper->getNavbar();
+$sidebar = $helper->getSidebar();
+$footer = $helper->getFooter();
+$showForm = true;
 
+if(!isset($_SESSION['userid'])) {
+    header("HTTP/1.1 404 Not Found");
+    echo '<div class = "text"><a href="index.php">Startseite</a></div>';
+    exit();
+}else {
 
+    echo $header;
+    echo $navbar;
+    echo $sidebar;
 
- <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-        <ul class="navbar-nav">
-            
-            </li>
+    if(isset($_GET['report'])) {
+        $projectId = null;
+        $userId = null;
+        $dateArray['startDate'] = null;
+        $dateArray['endDate'] = null;
+        $showForm = false;
 
-            <span class="navbar-text">
-               <h3>Project Time Tool</h3>
-               <time></time>
-              </span>
+        if (isset($_POST['projectId'])) {
+            $projectId = $_POST['projectId'];
+        }
+        if (isset($_POST['userId'])) {
+            $userId = $_POST['userId'];
+        }
+        if (isset($_POST['startDate'])) {
+            $dateArray['startDate'] = $_POST['startDate'];
+        }
+        if (isset($_POST['endDate'])) {
+            $dateArray['endDate'] = $_POST['endDate'];
+        }
 
+        $requestMethod = 'GET';
 
-    </nav>
+        $dbConnection = (new DatabaseConnector())->connect();
 
+        $reportController = new ReportController($dbConnection, $requestMethod, $projectId, $userId, $dateArray);
+        $reportController->processRequest();
 
+        /*echo "<div class='inhalt'</div>";
+        echo "<h1>Buchungsstatistik</h1>";
+        echo "<h2>Total pro Mitarbeiter</h2>";
+        echo "<table class='table table-bordered table-sm'>";
+        echo "<thead><tr><th>Mitarbeiter</th><th>Projekte</th></tr></thead>";
+        foreach($reportController->dataArray as $row){
+            "<tr><td>".$row["Jahr"]."</td><td>".$row["Total"]."</td></tr>";
+        }*/
+    }
 
- <!-- Load an icon library -->
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    if(isset($errorMessage)) {
+        echo '<div class = "error"><mark>'.$errorMessage.'</mark></div>';
+    }
 
- <!-- The sidebar -->
- <div class="sidebar">
-    <a href="zeiterfassung_startpage.php"><i class="fa fa-fw fa-clock"></i> Zeiterfassung</a>
-    <a href="projektverwaltung_startpage.php"><i class="fa fa-fw fa-wrench"></i> Projekt Verwaltung</a>
-    <a href="mitarbeiterverwaltung_startpage.php"><i class="fa fa-fw fa-user"></i> Mitarbeiter Verwaltung</a>
-    <a href="reporterstellen_startpage.php"><i class="fa fa-fw fa-file-export"></i> Report Erstellen</a><p></p>
- 
+    if($showForm) {
+        echo '
+            <div class="inhalt">
+                <h1>Bericht erstellen</h1>
+                <form action="?report" method="post">
+                    <div class="form-group">
+                        <label for="date1">Start Datum</label>
+                        <input type="date" class="form-control" id="date1" name = "startDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="date2">End Datum</label>
+                        <input type="date" class="form-control" id="date2" name = "endDate">
+                    </div>
+                    <input type="submit" class="btn btn-info" value="Bericht erstellen">
+                </form>
+            </div>';
+    }
+echo $footer;
 
-  </div> 
-
-
-<!-- versuch Bild einzufügen-->
-<div class="logo">
-<img src="../../frontend/Kernkraftwer_Goesgen_Daeniken_AG.jpg" alt="Firmen Logo" class="img-fluid" width="300" >
-</div>
-
- 
-
-    <form>
-<div class="inhalt">
-    <h1>Report erstellen</h4><p></p>
-
-        
-        
-
-        Start Datum:<p></p>
-        <input type="date" class="btn btn-outline-dark"></button><p></p>
-        
-        End Datum:<p></p>
-        <input type="date" class="btn btn-outline-dark"></button>
-    
-    </div>
-    <input type="submit" class="btn btn-info" value="Speichern">
-
-    </form>
-
-
-
-<div class="footer">
-<p></Footer></p>
-</div>
-
-</body>
-
-</html>
+}
