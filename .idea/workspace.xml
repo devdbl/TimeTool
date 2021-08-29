@@ -2,26 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e093998e-49d9-4d65-849e-9fd060312824" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/views/Helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/CSS/layout.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/mitarbeiterverwaltung_bearbeiten.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/mitarbeiterverwaltung_bearbeiten.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/mitarbeiterverwaltung_neu.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/mitarbeiterverwaltung_neu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/mitarbeiterverwaltung_startpage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/mitarbeiterverwaltung_startpage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/projektverwaltung_bearbeiten.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/projektverwaltung_bearbeiten.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/projektverwaltung_neu.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/projektverwaltung_neu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/projektverwaltung_startpage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/projektverwaltung_startpage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/reporterstellen_startpage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/reporterstellen_startpage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/startseite.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/startseite.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/zeiterfassung_login.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/zeiterfassung_login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/zeiterfassung_startpage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/zeiterfassung_startpage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/logout.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/logout.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/views/CSS/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/CSS/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/views/html/EditProject.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/views/html/NewProjectForm.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/views/html/User.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/CSS/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/CSS/layout.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/Helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/Helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/logout.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/logout.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,7 +183,7 @@
       <workItem from="1629821385591" duration="3075000" />
       <workItem from="1629874707470" duration="20000" />
       <workItem from="1629874747902" duration="4024000" />
-      <workItem from="1630239142324" duration="4352000" />
+      <workItem from="1630239142324" duration="4774000" />
     </task>
     <servers />
   </component>
