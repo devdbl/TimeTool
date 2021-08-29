@@ -15,7 +15,8 @@ echo $header;
 echo $navbar;
 
 if(!isset($_SESSION['userid'])) {
-    die('<div class = "text">Bitte zuerst <a href="./views/login.php">einloggen</a></div>');
+    die('<div class = "text">Bitte zuerst <a href="./views/login.php">einloggen</a> oder 
+                                          <a href="./views/register.php">registrieren</a></div>');
 }else {
     echo $sidebar;
     echo '  <div class="inhalt">
