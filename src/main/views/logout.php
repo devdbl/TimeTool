@@ -1,17 +1,14 @@
 <?php
 require_once ("Helper.php");
+$helper = new Helper();
+$header = $helper->getHeader("Login");
+$navbar = $helper->getNavbar();
+$footer = $helper->getFooter();
 
 session_start();
 session_destroy();
-?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Registrierung</title>
-    <link rel="stylesheet" href="./views/css/app.css">
-</head>
-<body>
-"Logout erfolgreich"
-</body>
-</html>
+echo $header;
+echo $navbar;
+echo '<div class = "text">Logout erfolgreich</div>';
+echo $footer;
