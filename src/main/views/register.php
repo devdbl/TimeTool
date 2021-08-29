@@ -1,37 +1,39 @@
 <?php
-require_once("./tools/DatabaseConnector.php");
+require_once("../tools/DatabaseConnector.php");
+require_once ("Helper.php");
 
 session_start();
-$db = (new DatabaseConnector())->connect();
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Registrierung</title>
-    <link rel="stylesheet" href="./views/css/app.css">
-</head>
-<body>
 
-<?php
+$helper = new Helper();
+$header = $helper->getHeader("Login");
+$navbar = $helper->getNavbar();
+$footer = $helper->getFooter();
+
+$db = (new DatabaseConnector())->connect();
+
+echo $header;
+echo $navbar;
+
 $showForm = true; //Variable ob das Registrierungsformular anezeigt werden soll
 
 if(isset($_GET['register'])) {
     $error = false;
     $personalId = $_POST['personalId'];
+    $shortname = $_POST['shortname'];
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
-    $passwort = $_POST['passwort'];
-    $passwort2 = $_POST['passwort2'];
+    $password = $_POST['password'];
+    $password2 = $_POST['password2'];
 
     if(!is_numeric($personalId)) {
         echo 'Bitte eine gültige Personalnummer eingeben<br>';
         $error = true;
     }
-    if(strlen($passwort) == 0) {
+    if(strlen($password) == 0) {
         echo 'Bitte ein Passwort angeben<br>';
         $error = true;
     }
-    if($passwort != $passwort2) {
+    if($password != $password2) {
         echo 'Die Passwörter müssen übereinstimmen<br>';
         $error = true;
     }
@@ -49,14 +51,15 @@ if(isset($_GET['register'])) {
 
     //Keine Fehler, wir können den Nutzer registrieren
     if(!$error) {
-        $passwort_hash = password_hash($passwort, PASSWORD_DEFAULT);
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-        $statement = $db->prepare("INSERT INTO employee (EMPLOYEE_ID, FIRSTNAME, LASTNAME, PASSWORD) VALUES (:personalId, :firstname, :lastname, :passwort)");
+        $statement = $db->prepare("INSERT INTO employee (EMPLOYEE_ID, FIRSTNAME, LASTNAME, SHORTNAME, PASSWORD) VALUES (:personalId, :firstname, :lastname, :shortname, :password)");
         $result = $statement->execute(array(
                 'personalId' => $personalId,
                 'firstname' => $firstname,
                 'lastname' => $lastname,
-                'passwort' => $passwort_hash));
+                'shortname' => $shortname,
+                'password' => $password_hash));
 
         if($result) {
             echo 'Du wurdest erfolgreich registriert. <a href="login.php">Zum Login</a>';
@@ -68,30 +71,37 @@ if(isset($_GET['register'])) {
 }
 
 if($showForm) {
-    ?>
-
+echo
+'<div class="inhalt">
+    <h1>Anmeldung beim TimeTool</h1>
     <form action="?register=1" method="post">
-        Vorname:<br>
-        <input type="text" size="40"  maxlength="250" name="firstname"><br>
-
-        Nachname<br>
-        <input type="text" size="40"  maxlength="250" name="lastname"><br>
-
-        Personalnummer:<br>
-        <input type="number" size="4" maxlength="4" name="personalId"><br><br>
-
-        Dein Passwort:<br>
-        <input type="password" size="40"  maxlength="250" name="passwort"><br>
-
-        Passwort wiederholen:<br>
-        <input type="password" size="40" maxlength="250" name="passwort2"><br><br>
-
-        <input type="submit" value="Abschicken">
+        <div class="form-group">
+            <label for="fistname">Vorname</label>
+            <input type="text" class="form-control" id="fistname" name="firstname">
+        </div>
+        <div class="form-group">
+            <label for="lastname">Nachname</label>
+            <input type="text" class="form-control" id="lastname" name="lastname">
+        </div>
+        <div class="form-group">
+            <label for="id">Mitarbeiter ID</label>
+            <input type="number" class="form-control" id="id" name="personalId">
+        </div>
+        <div class="form-group">
+            <label for="shortname">Benutzername</label>
+            <input type="text" class="form-control" id="shortname" name="shortname">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Passwort</label>
+            <input type="password" class="form-control" id="pwd" name="password">
+        </div>
+        <div class="form-group">
+            <label for="pwd2">Passwort wiederholen</label>
+            <input type="password" class="form-control" id="pwd2" name="password2">
+        </div>
+        <input type="submit" class="btn btn-info" value="Anmeldung abschliessen">
     </form>
+</div> ';
 
-    <?php
-} //Ende von if($showFormular)
-?>
-
-</body>
-</html>
+}
+echo $footer;
