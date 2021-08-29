@@ -11,6 +11,7 @@ $navbar = $helper->getNavbar();
 $sidebar = $helper->getSidebar();
 $footer = $helper->getFooter();
 $showForm = true;
+$html = null;
 
 if(!isset($_SESSION['userid'])) {
     header("HTTP/1.1 404 Not Found");
@@ -32,8 +33,8 @@ if(!isset($_SESSION['userid'])) {
         if (isset($_POST['projectId'])) {
             $projectId = $_POST['projectId'];
         }
-        if (isset($_POST['userId'])) {
-            $userId = $_POST['userId'];
+        if (isset($_SESSION['userid'])) {
+            $userId = $_SESSION['userid'];
         }
         if (isset($_POST['startDate'])) {
             $dateArray['startDate'] = $_POST['startDate'];
@@ -41,22 +42,27 @@ if(!isset($_SESSION['userid'])) {
         if (isset($_POST['endDate'])) {
             $dateArray['endDate'] = $_POST['endDate'];
         }
-
-        $requestMethod = 'GET';
+        $overview = 1;
+        $requestMethod = 'WEB';
 
         $dbConnection = (new DatabaseConnector())->connect();
 
-        $reportController = new ReportController($dbConnection, $requestMethod, $projectId, $userId, $dateArray);
+        $reportController = new ReportController($dbConnection, $requestMethod, $projectId, $userId, $dateArray, $overview);
         $reportController->processRequest();
 
-        /*echo "<div class='inhalt'</div>";
+        echo "<div class='inhalt'</div>";
         echo "<h1>Buchungsstatistik</h1>";
         echo "<h2>Total pro Mitarbeiter</h2>";
         echo "<table class='table table-bordered table-sm'>";
-        echo "<thead><tr><th>Mitarbeiter</th><th>Projekte</th></tr></thead>";
+        echo "<thead><tr><th>Mitarbeiter</th><th>Projekt</th><th>Zeit</th></tr></thead>";
+        $sum = 0;
         foreach($reportController->dataArray as $row){
-            "<tr><td>".$row["Jahr"]."</td><td>".$row["Total"]."</td></tr>";
-        }*/
+            $html .= "<tr><td>".$row["EMPLOYEE_ID"]."</td><td>".$row["PROJECT_ID"]."</td><td>".$row["SUM(TIME)"]."</td></tr>";
+            $sum++;
+        }
+        $html .= "<tfoot><tr><th>Summe</th><th>$sum</th></tr></tfoot></table>";
+        echo $html;
+
     }
 
     if(isset($errorMessage)) {
