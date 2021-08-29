@@ -15,6 +15,7 @@ class Helper
                         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
                         <title>' . $title . '</title>
                     </head>
+                    <body>
                    ';
 
         return $header;
@@ -64,7 +65,6 @@ class Helper
                    </div>
         
                    </body>
-        
                    </html>';
         return $footer;
     }
