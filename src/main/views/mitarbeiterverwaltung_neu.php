@@ -54,7 +54,7 @@
 <form>
     <div class="inhalt">
         <h1>Bitte erfassen sie einen neuen Mitarbeiter</h4><p></p>
-            <div class="form-group">
+              <div class="form-group">
                 <label for="usr">Vorname</label>
                 <input type="text" class="form-control" id="usr">
               </div>
