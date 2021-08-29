@@ -7,7 +7,7 @@ session_start();
 $helper = new Helper();
 $header = $helper->getHeader("Login");
 $navbar = $helper->getNavbar();
-
+$footer = $helper->getFooter();
 
 $db = (new DatabaseConnector())->connect();
 
@@ -54,3 +54,5 @@ echo    '
                 <input type="submit" class="btn btn-info" value="Login">
             </form>
         </div>';
+
+echo $footer;
