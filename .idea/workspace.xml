@@ -2,6 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e093998e-49d9-4d65-849e-9fd060312824" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/Helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/Helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/logout.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/logout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/mitarbeiterverwaltung_bearbeiten.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/mitarbeiterverwaltung_bearbeiten.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/startseite.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/zeiterfassung_login.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/zeiterfassung_startpage.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,12 +39,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/controllers/EmployeeController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/api/employee.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/vendor/autoload.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/controllers/EmployeeController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/models/EmployeeGateway.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/.env" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/views/html/EditProject.html" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/vendor/autoload.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
   </component>
   <component name="PhpDebugGeneral" show_user_defined_constants="false" />
   <component name="PhpServers">
@@ -108,7 +114,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/views" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="project.scopes" />
@@ -119,11 +125,11 @@
       <recent name="C:\Users\admin\Documents\GitHub\TimeTool\src\main\controllers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\admin\GitHub\TimeTool\src\main\views" />
+      <recent name="C:\Users\admin\GitHub\TimeTool\src\main\views\CSS" />
       <recent name="C:\Users\admin\Documents\GitHub\TimeTool\src" />
       <recent name="C:\Users\admin\Documents\GitHub\TimeTool\src\main" />
       <recent name="C:\Users\admin\Documents\GitHub\TimeTool" />
-      <recent name="C:\Users\admin\Documents\GitHub\TimeTool\src\main\models" />
-      <recent name="C:\Users\admin\Documents\GitHub\TimeTool\src\main\tools" />
     </key>
   </component>
   <component name="RunManager" selected="PHPUnit.ValidationTest">
@@ -180,8 +186,10 @@
       <workItem from="1629820775658" duration="585000" />
       <workItem from="1629821385591" duration="3075000" />
       <workItem from="1629874707470" duration="20000" />
+
       <workItem from="1629874747902" duration="4478000" />
       <workItem from="1629882884361" duration="792000" />
+
     </task>
     <servers />
   </component>
@@ -213,6 +221,8 @@
           <line>89</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
+
+
       </breakpoints>
     </breakpoint-manager>
   </component>

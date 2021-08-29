@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="layout.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <title>Project Time Tool Zeiterfassung Startseite</title>
+    <title>Project Time Tool Projekt bearbeiten</title>
 </head>
 
 <body>
@@ -40,23 +40,41 @@
     <a href="mitarbeiterverwaltung_startpage.php"><i class="fa fa-fw fa-user"></i> Mitarbeiter Verwaltung</a>
     <a href="reporterstellen_startpage.php"><i class="fa fa-fw fa-file-export"></i> Report Erstellen</a><p></p>
  
+    <a href="projektverwaltung_startpage.php"><i class="far fa-caret-square-left"></i></i> Zurück</a>
   </div> 
-  
+
 
 <!-- versuch Bild einzufügen-->
 <div class="logo">
-<img src="Kernkraftwer_Goesgen_Daeniken_AG.jpg" alt="Firmen Logo" class="img-fluid" width="300" >
+<img src="../../frontend/Kernkraftwer_Goesgen_Daeniken_AG.jpg" alt="Firmen Logo" class="img-fluid" width="300" >
 </div>
 
  
 
-    <form>
-<div class="inhalt">
-    <h1>Herzlich Willkommen</h4>
-       
-   
-    </div>
-    </form>
+<form>
+    <div class="inhalt">
+        <h1>Welches Projekt möchten sie bearbeiten?</h4><p></p>
+
+
+
+            <div class="form-group">
+                <label for="usr">Projektname:</label>
+                <input type="text" class="form-control" id="usr">
+              </div>
+              <div class="form-group">
+                <label for="pwd">Projekt ID:</label>
+                <input type="text" class="form-control" id="pwd">
+              </div>
+              <div class="form-group">
+                <label for="pwd">Beschreibung:</label>
+                <input type="text" class="form-control" id="pwd">
+              </div>
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
+                <label class="custom-control-label" for="customCheck">Projekt Aktiv</label>
+              </div>
+              <input type="submit" class="btn btn-info" value="Speichern">
+        </form>
 
 
 

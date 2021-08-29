@@ -1,31 +1,19 @@
-/*Datei layout.css 
-
-
-
-*/
-
-
-
-
-
-
-
+/*Datei layout.css
 
 /* Style the sidebar - fixed full height */
 .sidebar {
-    height: 85%;
+    height: 100%;
     width: 300px;
     position: fixed;
-    z-index: 1;
-    top: 100;
-    left: 10;
+    z-index: 0;
+    top: 72px;
     background-color: #111;
     overflow-x: hidden;
     padding-top: 100px;
   }
 
-  /* Bild Logo*/
-.logo {
+ /* Bild Logo*/
+ .logo {
   position: relative;
     height: 150px;
     width: 1900px;
@@ -104,3 +92,22 @@
     color: #f1f1f1;
     text-align: center;
   }
+.text {
+    font-family: sans-serif;
+    width: 650px;
+    position: relative;
+    top: 50%;
+    left: 40%;
+}
+.error {
+    font-family: sans-serif;
+    width: 650px;
+    position: relative;
+    top: 50%;
+    left: 40%;
+}
+
+mark {
+    background-color: yellow;
+    color: black;
+}

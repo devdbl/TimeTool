@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="layout.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <title>Project Time Tool Mitarbeiterverwaltung Startseite</title>
+    <title>Project Time Tool Projektverwaltung Startseite</title>
 </head>
 
 <body>
@@ -45,7 +45,7 @@
 
 <!-- versuch Bild einzufügen-->
 <div class="logo">
-<img src="Kernkraftwer_Goesgen_Daeniken_AG.jpg" alt="Firmen Logo" class="img-fluid" width="300" >
+<img src="../../frontend/Kernkraftwer_Goesgen_Daeniken_AG.jpg" alt="Firmen Logo" class="img-fluid" width="300" >
 </div>
 
  
@@ -53,9 +53,9 @@
 <form>
     <div class="inhalt">
         <h1>Was möchten sie tun?</h4><p></p>
-            <a href="mitarbeiterverwaltung_neu.php" class="btn btn-outline-dark" role="button">Mitarbeiter neu anlegen</a><p></p>
+            <a href="projektverwaltung_neu.php" class="btn btn-outline-dark" role="button">Projekt neu anlegen</a><p></p>
     
-            <a href="mitarbeiterverwaltung_bearbeiten.php" class="btn btn-outline-dark" role="button">Mitarbeiter bearbeiten</a><p></p>
+            <a href="projektverwaltung_bearbeiten.php" class="btn btn-outline-dark" role="button">Projekt bearbeiten</a><p></p>
        
         </div>
         </form>
