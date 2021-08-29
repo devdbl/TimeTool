@@ -48,9 +48,9 @@ class ReportController
                 break;
         }
         header($response['status_code_header']);
-        if ($response['body']) {
+        if (false) {
             echo $response['body'];
-        }elseif ($response['web']){
+        }else{
             $this->dataArray = $response['web'];
         }
     }
@@ -76,10 +76,15 @@ class ReportController
 
     private function getTimeReportWeb(){
         $this->dateArray = $this->validateDate($this->dateArray);
-        $result = $this->reportGateway->selectAll($this->dateArray);
-        if (! $result) {
+        if($this->overview == 1){
+            $result = $this->reportGateway->selectReportUserOverview($this->dateArray,$this->userId);
+        }else{
+            $result = $this->reportGateway->selectReportUser($this->dateArray,$this->userId);
+        }
+        if(! $result) {
             return $this->notFoundRequest();
         }
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['web'] = $result;
         return $response;
     }
