@@ -43,16 +43,27 @@ class ReportController
             case 'WEB':
                 $response = $this->getTimeReportWeb();
                 break;
+            case 'ADD':
+                $response = $this->addReport();
+                break;
             default:
                 $response = $this->notFoundRequest();
                 break;
         }
         header($response['status_code_header']);
-        if (false) {
+        /*if (!$response['body']) {
             echo $response['body'];
-        }else{
-            $this->dataArray = $response['web'];
+        }*/
+        if($response['body']){
+            $this->dataArray = $response['body'];
         }
+    }
+
+    private function addReport(){
+        $this->reportGateway->add($_POST);
+        $response['status_code_header'] = 'HTTP/1.1 201 Created';
+        $response['body'] = null;
+        return $response;
     }
 
     private function addTimeReport(){
@@ -85,7 +96,7 @@ class ReportController
             return $this->notFoundRequest();
         }
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['web'] = $result;
+        $response['body'] = $result;
         return $response;
     }
 
