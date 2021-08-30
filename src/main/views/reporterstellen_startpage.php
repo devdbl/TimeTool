@@ -13,14 +13,13 @@ $footer = $helper->getFooter();
 $showForm = true;
 $html = null;
 
+echo $header;
+echo $navbar;
+
 if(!isset($_SESSION['userid'])) {
-    header("HTTP/1.1 404 Not Found");
-    echo '<div class = "text"><a href="index.php">Startseite</a></div>';
-    exit();
+    die('<div class="inhalt">Bitte zuerst <a href="login.php">einloggen</a></div>');
 }else {
 
-    echo $header;
-    echo $navbar;
     echo $sidebar;
 
     if(isset($_GET['report'])) {
