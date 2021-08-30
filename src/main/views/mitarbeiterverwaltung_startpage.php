@@ -1,5 +1,4 @@
 <?php
-require_once("../controllers/ReportController.php");
 require_once("../tools/DatabaseConnector.php");
 require_once("Helper.php");
 
@@ -11,17 +10,16 @@ $navbar = $helper->getNavbar();
 $sidebar = $helper->getSidebar();
 $footer = $helper->getFooter();
 
+echo $header;
+echo $navbar;
+
 if(!isset($_SESSION['userid'])) {
-    header("HTTP/1.1 404 Not Found");
-    echo '<div class = "text"><a href="index.php">Startseite</a></div>';
-    exit();
+    die('<div class="inhalt">Bitte zuerst <a href="login.php">einloggen</a></div>');
 }elseif($_SESSION['admin']==0) {
     die(header("Location: http://localhost/mitarbeiterverwaltung_bearbeiten.php"));
 
 }else {
 
-    echo $header;
-    echo $navbar;
     echo $sidebar;
 
     echo '<div class="inhalt">';
