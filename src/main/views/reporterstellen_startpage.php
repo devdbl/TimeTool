@@ -27,6 +27,8 @@ if(!isset($_SESSION['userid'])) {
         $userId = null;
         $dateArray['startDate'] = null;
         $dateArray['endDate'] = null;
+        $overview = 1;
+        $requestMethod = 'WEB';
         $showForm = false;
 
         if (isset($_POST['projectId'])) {
@@ -41,8 +43,6 @@ if(!isset($_SESSION['userid'])) {
         if (isset($_POST['endDate'])) {
             $dateArray['endDate'] = $_POST['endDate'];
         }
-        $overview = 1;
-        $requestMethod = 'WEB';
 
         $dbConnection = (new DatabaseConnector())->connect();
 
