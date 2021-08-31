@@ -9,6 +9,8 @@ class EmployeeController{
     private $userId;
     private $employeeGateway;
 
+    public $dataArray;
+
     
     public function __construct($db, $requestMethod, $userId)
     {
@@ -41,7 +43,7 @@ class EmployeeController{
         }
         header($response['status_code_header']);
         if ($response['body']) {
-            echo $response['body'];
+            $this->dataArray = $response['body'];
         }
     }
 
@@ -63,7 +65,7 @@ class EmployeeController{
     }
 
     private function createUser(){
-        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+        $input = $_POST;
         if (! $this->validatePerson($input)) {
             return $this->unprocessableEntityResponse();
         }
@@ -78,7 +80,7 @@ class EmployeeController{
         if (! $result) {
             return $this->notFoundRequest();
         }
-        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+        $input = $_POST;
         if (! $this->validatePerson($input)) {
             return $this->unprocessableEntityResponse();
         }
