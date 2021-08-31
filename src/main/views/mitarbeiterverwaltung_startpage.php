@@ -24,9 +24,13 @@ if(!isset($_SESSION['userid'])) {
 
     echo '<div class="inhalt">';
     echo '<h1>Was möchten sie tun?</h1>';
-    echo '<form>';
+    echo '<br><br>';
+    echo '<div class="form-group">';
     echo '<a href="mitarbeiterverwaltung_bearbeiten.php" class="btn btn-outline-dark" role="button">Meine Daten ändern</a>';
+    echo '</div>';
+    echo '<div class="form-group">';
     echo '<a href="mitarbeiterverwaltung_neu.php" class="btn btn-outline-dark" role="button">Mitarbeiter Daten ändern</a>';
+    echo '</div>';
     echo '</div>';
     echo $footer;
 }
