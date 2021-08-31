@@ -51,9 +51,6 @@ class ReportController
                 break;
         }
         header($response['status_code_header']);
-        /*if (!$response['body']) {
-            echo $response['body'];
-        }*/
         if($response['body']){
             $this->dataArray = $response['body'];
         }
