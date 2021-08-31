@@ -23,7 +23,7 @@ if(isset($_GET['login'])) {
     if ($user !== false && password_verify($password, $user['PASSWORD'])) {
         $_SESSION['userid'] = $user['EMPLOYEE_ID'];
         $_SESSION['name']   = $user['FIRSTNAME'];
-        $_SESSION['admin']= $user['ROLE'];
+        $_SESSION['admin']= (int) $user['ROLE'];
         die(header('Location: http://localhost/'));
     } else {
         $errorMessage = "Kürzel oder Passwort war ungültig<br>";
