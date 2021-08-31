@@ -71,7 +71,6 @@ class EmployeeGateway
                       SET
                         FIRSTNAME = :firstname,
                         LASTNAME =  :lastname,
-                        SHORTNAME = :shortname,
                         PASSWORD =  :password,
                         ROLE =      :role 
                       WHERE
@@ -82,7 +81,6 @@ class EmployeeGateway
                 'personalId' => (int) $personalId,
                 'firstname'  => $input['firstname'],
                 'lastname' => $input['lastname'],
-                'shortname' => $input['shortname'],
                 'password' => $input['password'],
                 'role' => $input['role'],
             ]);
