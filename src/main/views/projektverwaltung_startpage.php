@@ -29,6 +29,6 @@ if(!isset($_SESSION['userid'])) {
     echo '<a href="projektverwaltung_bearbeiten.php" class="btn btn-outline-dark" role="button">Projekt Daten ändern</a>';
     echo '</div>';
     echo '</div>';
-    
+
     echo $footer;
 }
