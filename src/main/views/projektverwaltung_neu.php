@@ -1,80 +1,78 @@
-<!DOCTYPE html>
-<html lang="de">
+<?php
+require_once("../controllers/ProjectController.php");
+require_once("../tools/DatabaseConnector.php");
+require_once ("Helper.php");
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="layout.css" type="text/css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <title>Project Time Tool Neues Projekt</title>
-</head>
+session_start();
 
-<body>
-    
+$helper = new Helper();
+$header = $helper->getHeader("Projekt anlegen");
+$navbar = $helper->getNavbar();
+$sidebar = $helper->getSidebar();
+$footer = $helper->getFooter();
+$showForm = true;
+$error = false;
 
+echo $header;
+echo $navbar;
 
+/*if(!isset($_SESSION['userid'])) {
+    die('<div class="inhalt">Bitte zuerst <a href="login.php">einloggen</a></div>');
+}else {*/
 
- <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-        <ul class="navbar-nav">
-            
-            </li>
+    echo $sidebar;
 
-            <span class="navbar-text">
-               <h3>Project Time Tool</h3>
-               <time></time>
-              </span>
-
-
-    </nav>
-
-
-
- <!-- Load an icon library -->
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
- <!-- The sidebar -->
- <div class="sidebar">
-    <a href="zeiterfassung_startpage.php"><i class="fa fa-fw fa-clock"></i> Zeiterfassung</a>
-    <a href="projektverwaltung_startpage.php"><i class="fa fa-fw fa-wrench"></i> Projekt Verwaltung</a>
-    <a href="mitarbeiterverwaltung_startpage.php"><i class="fa fa-fw fa-user"></i> Mitarbeiter Verwaltung</a>
-    <a href="reporterstellen_startpage.php"><i class="fa fa-fw fa-file-export"></i> Report Erstellen</a><p></p>
- 
-    <a href="projektverwaltung_neu.php"><i class="far fa-caret-square-left"></i></i> Zurück</a>
-  </div> 
+    if(isset($_GET['edit'])){
+        $projectId = null;
+        $getDeactivatedProjects = null;
+        $showForm = false;
+        $requestMethod = 'PUT';
 
 
-<!-- versuch Bild einzufügen-->
-<div class="logo">
-<img src="../../frontend/Kernkraftwer_Goesgen_Daeniken_AG.jpg" alt="Firmen Logo" class="img-fluid" width="300" >
-</div>
+        if (isset($_GET['id'])) {
+            $projectId = $_POST['projectId'];
+        }
+        if(!is_numeric($projectId)) {
+            echo '<div class="text"><mark>Bitte eine gültige Projektnummer eingeben</mark><br></div>';
+            $error = true;
+            $showForm = true;
+        }
+        if(strlen($_POST['projectname']) == 0) {
+            echo '<div class="text"><mark>Bitte ein Projektnamen angeben</mark><br></div>';
+            $error = true;
+            $showForm = true;
+        }
+        if(!$error) {
 
- 
+            $dbConnection = (new DatabaseConnector())->connect();
 
-<form>
-    <div class="inhalt">
-        <h1>Bitte erfassen sie ein neues Projekt</h4><p></p>
-            <div class="form-group">
-                <label for="usr">Projektname:</label>
-                <input type="text" class="form-control" id="usr">
-              </div>
-              <div class="form-group">
-                <label for="pwd">Projekt ID:</label>
-                <input type="text" class="form-control" id="pwd">
-              </div>
-              <div class="form-group">
-                <label for="pwd">Beschreibung:</label>
-                <input type="text" class="form-control" id="pwd">
-              </div>
-              <input type="submit" class="btn btn-info" value="Speichern">
-        </form>
+            $projectController = new ProjectController($dbConnection, $requestMethod, $projectId, $getDeactivatedProjects);
+            $projectController->processRequest();
+        }
+    }
 
 
 
-<div class="footer">
-<p></Footer></p>
-</div>
 
-</body>
-
-</html>
+    if($showForm) {
+        echo '
+          <div class="inhalt">
+            <h1>Bitte erfasse deine Änderungen</h1>
+                <form action="?edit" method="post">
+                    <div class="form-group">
+                        <label for="projectName">Projektname:</label>
+                        <input type="text" class="form-control" id="projectName" name="projectname">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectId">Projekt Nummer:</label>
+                        <input type="number" class="form-control" id="projectId" name="projectId">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Beschreibung</label>
+                        <input type="text" class="form-control" id="description" name="description">
+                    </div>
+                    <input type="submit" class="btn btn-info" value="Projekt erfassen">
+                </form>';
+    }
+    echo $footer;
+//}
