@@ -22,14 +22,14 @@ echo $navbar;
 
     echo $sidebar;
 
-    if(isset($_GET['edit'])){
+    if(isset($_GET['add'])){
         $projectId = null;
         $getDeactivatedProjects = null;
         $showForm = false;
         $requestMethod = 'POST';
 
 
-        if (isset($_GET['id'])) {
+        if (isset($_POST['projectId'])) {
             $projectId = $_POST['projectId'];
         }
         if(!is_numeric($projectId)) {
@@ -58,7 +58,7 @@ echo $navbar;
         echo '
           <div class="inhalt">
             <h1>Bitte erfasse deine Änderungen</h1>
-                <form action="?edit" method="post">
+                <form action="?add" method="post">
                     <div class="form-group">
                         <label for="projectName">Projektname:</label>
                         <input type="text" class="form-control" id="projectName" name="projectname">
