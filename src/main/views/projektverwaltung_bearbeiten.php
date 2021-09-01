@@ -24,7 +24,7 @@ echo $navbar;
 echo $sidebar;
 
 if(isset($_GET['edit'])){
-    $projectId = null;
+
     $getDeactivatedProjects = null;
     $showForm = false;
     $requestMethod = 'PUT';
@@ -35,7 +35,7 @@ if(isset($_GET['edit'])){
         $showForm = true;
     }
     if(!isset($_POST['isActive'])) {
-        $_POST['isActive'] = 0;
+        $_POST['isActive'] = "0";
     }
     if(!$error) {
 
