@@ -72,7 +72,7 @@ class ProjectController{
     }
 
     private function createProject(){
-        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+        $input = $_POST;
         if (! $this->validateProject($input)) {
             return $this->unprocessableEntityResponse();
         }
@@ -87,7 +87,7 @@ class ProjectController{
         if (! $result) {
             return $this->notFoundRequest();
         }
-        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+        $input = $_POST;
         if (! $this->validateProjectUpdate($input)) {
             return $this->unprocessableEntityResponse();
         }
