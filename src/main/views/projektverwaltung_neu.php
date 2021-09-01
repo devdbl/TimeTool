@@ -26,7 +26,7 @@ echo $navbar;
         $projectId = null;
         $getDeactivatedProjects = null;
         $showForm = false;
-        $requestMethod = 'PUT';
+        $requestMethod = 'POST';
 
 
         if (isset($_GET['id'])) {
