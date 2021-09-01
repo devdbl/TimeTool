@@ -75,10 +75,6 @@ if(!isset($_SESSION['userid'])) {
             echo '<div class="custom-control custom-checkbox mb-3">
                     <input type="checkbox" class="custom-control-input" id="customCheck" name="role">
                     <label class="custom-control-label" for="customCheck">Administrator</label>
-                </div>
-                <div class="custom-control custom-checkbox mb-3">
-                    <input type="checkbox" class="custom-control-input" id="customCheck2" name="example1">
-                    <label class="custom-control-label" for="customCheck2">Mitarbeiter deaktivieren</label>
                 </div>';
         }
         echo '<input type="submit" class="btn btn-info" value="Speichern">
