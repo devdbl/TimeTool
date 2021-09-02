@@ -1,4 +1,7 @@
 <?php
+
+header("HTTP/1.1 404 Not Found");
+exit();/*
 require_once("../controllers/EmployeeController.php");
 require_once("../tools/DatabaseConnector.php");
 
@@ -25,4 +28,4 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 $dbConnection = (new DatabaseConnector())->connect();
 
 $employeeController = new EmployeeController($dbConnection,$requestMethod,$userId);
-$employeeController->processRequest();
+$employeeController->processRequest();*/
