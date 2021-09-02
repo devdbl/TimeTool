@@ -1,5 +1,7 @@
 <?php
-
+header("HTTP/1.1 404 Not Found");
+exit();
+/*
 require_once("../controllers/ProjectController.php");
 require_once("../tools/DatabaseConnector.php");
 
@@ -32,4 +34,4 @@ $dbConnection = (new DatabaseConnector())->connect();
 
 $projectController = new ProjectController($dbConnection, $requestMethod, $projectId, $getDeactivatedProjects);
 $projectController->processRequest();
-
+*/
