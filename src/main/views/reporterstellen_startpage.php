@@ -5,8 +5,16 @@ require_once("Helper.php");
 
 session_start();
 
+$script = '<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+           <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+           <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+           <script>
+               $(document).ready(function() {
+                   $("#report").DataTable();
+               } );
+           </script>';
 $helper = new Helper();
-$header = $helper->getHeader("Bericht erstellen");
+$header = $helper->getHeader("Bericht erstellen", $script);
 $navbar = $helper->getNavbar();
 $sidebar = $helper->getSidebar();
 $footer = $helper->getFooter();
@@ -52,14 +60,15 @@ if(!isset($_SESSION['userid'])) {
         echo "<div class='inhalt'</div>";
         echo "<h1>Buchungsstatistik</h1>";
         echo "<h2>Total pro Mitarbeiter</h2>";
-        echo "<table class='table table-bordered table-sm'>";
+        echo "<table id='report' class='table table-bordered table-sm'>";
         echo "<thead><tr><th>Mitarbeiter</th><th>Projekt</th><th>Zeit</th></tr></thead>";
         $sum = 0;
+        echo "<tbody>";
         foreach($reportController->dataArray as $row){
             $html .= "<tr><td>".$row["EMPLOYEE_ID"]."</td><td>".$row["PROJECT_ID"]."</td><td>".$row["SUM(TIME)"]."</td></tr>";
             $sum++;
         }
-        $html .= "<tfoot><tr><th>Summe</th><th>$sum</th></tr></tfoot></table>";
+        $html .= "</tbody></table>";
         echo $html;
 
     }
