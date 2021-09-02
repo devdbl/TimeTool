@@ -1,5 +1,8 @@
 <?php
 
+header("HTTP/1.1 404 Not Found");
+exit();
+/*
 require_once("../controllers/ReportController.php");
 require_once("../tools/DatabaseConnector.php");
 
@@ -47,3 +50,4 @@ $dbConnection = (new DatabaseConnector())->connect();
 
 $reportController = new ReportController($dbConnection, $requestMethod, $projectId, $userId, $dateArray, $overview);
 $reportController->processRequest();
+*/
