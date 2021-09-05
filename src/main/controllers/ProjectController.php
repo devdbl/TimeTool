@@ -1,6 +1,7 @@
 <?php
 
 require_once("../models/ProjectGateway.php");
+require_once("../tools/Validation.php");
 
 class ProjectController{
 
@@ -9,6 +10,7 @@ class ProjectController{
     private $getDeactivatedProjects;
     private $projectId;
     private $projectGateway;
+    private $validation;
 
 
     public function __construct($db, $requestMethod, $projectId, $getDeactivatedProjects)
@@ -17,6 +19,7 @@ class ProjectController{
         $this->projectId = $projectId;
         $this->getDeactivatedProjects = $getDeactivatedProjects;
         $this->projectGateway = new ProjectGateway($db);
+        $this->validation = new Validation();
     }
 
     public function processRequest(){
@@ -73,8 +76,8 @@ class ProjectController{
 
     private function createProject(){
         $input = $_POST;
-        if (! $this->validateProject($input)) {
-            return $this->unprocessableEntityResponse();
+        if (! $this->validation->validateProject($input)) {
+            return $this->validation->unprocessableEntityResponse();
         }
         $this->projectGateway->add($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
@@ -85,11 +88,11 @@ class ProjectController{
     private function updateProject($id){
         $result = $this->projectGateway->selectProject($id);
         if (! $result) {
-            return $this->notFoundRequest();
+            return $this->validation->notFoundRequest();
         }
         $input = $_POST;
-        if (! $this->validateProjectUpdate($input)) {
-            return $this->unprocessableEntityResponse();
+        if (! $this->validation->validateProjectUpdate($input)) {
+            return $this->validation->unprocessableEntityResponse();
         }
         $this->projectGateway->update($id, $input);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
@@ -99,39 +102,5 @@ class ProjectController{
 
     private function deleteProject($id){
         echo "Funktioniert nicht: es wäre das Projekt mit der Projektnummer ".$id. " gelöscht worden";
-    }
-
-    private function validateProject($input){
-        if (! isset($input['projectId'])) {
-            return false;
-        }
-        if (! isset($input['projectname'])) {
-            return false;
-        }
-        return true;
-    }
-
-    private function validateProjectUpdate($input){
-        if (! isset($input['projectname'])) {
-            return false;
-        }
-        if (! isset($input['isActive'])) {
-            return false;
-        }
-        return true;
-    }
-
-    private function unprocessableEntityResponse(){
-        $response['status_code_header'] = 'HTTP/1.1 422 Unprocessable Entity';
-        $response['body'] = json_encode([
-            'error' => 'Invalid input'
-        ]);
-        return $response;
-    }
-
-    private function notFoundRequest(){
-        $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
-        $response['body'] = null;
-        return $response;
     }
 }
