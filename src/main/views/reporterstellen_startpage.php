@@ -61,11 +61,11 @@ if(!isset($_SESSION['userid'])) {
         echo "<h1>Buchungsstatistik</h1>";
         echo "<h2>Total pro Mitarbeiter</h2>";
         echo "<table id='report' class='table table-bordered table-sm'>";
-        echo "<thead><tr><th>Mitarbeiter</th><th>Projekt</th><th>Zeit</th></tr></thead>";
+        echo "<thead><tr><th>Mitarbeiter</th><th>Kürzel</th><th>Projekt</th><th>Zeit</th></tr></thead>";
         $sum = 0;
         echo "<tbody>";
         foreach($reportController->dataArray as $row){
-            $html .= "<tr><td>".$row["EMPLOYEE_ID"]."</td><td>".$row["PROJECT_ID"]."</td><td>".$row["SUM(TIME)"]."</td></tr>";
+            $html .= "<tr><td>".$row["FIRSTNAME"]." ".$row["LASTNAME"]."</td><td>".$row["SHORTNAME"]."</td><td>".$row["PROJECT_ID"]."</td><td>".$row["SUM(time.TIME)"]."</td></tr>";
             $sum++;
         }
         $html .= "</tbody></table>";
