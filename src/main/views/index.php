@@ -21,7 +21,7 @@ if(!isset($_SESSION['userid'])) {
     echo $sidebar;
     echo '  <div class="inhalt">
                 <h1>Herzlich Willkommen</h1>
-                <p>'.$_SESSION['name'].'</p>
+                <h2>'.$_SESSION['name'].'</h2>
    
             </div>';
 }

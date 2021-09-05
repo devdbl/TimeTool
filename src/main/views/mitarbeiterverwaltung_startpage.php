@@ -1,71 +1,43 @@
-<!DOCTYPE html>
-<html lang="de">
+<?php
+require_once("../tools/DatabaseConnector.php");
+require_once("Helper.php");
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="layout.css" type="text/css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <title>Project Time Tool Mitarbeiterverwaltung Startseite</title>
-</head>
+session_start();
 
-<body>
-    
+$helper = new Helper();
+$header = $helper->getHeader("Mutation");
+$navbar = $helper->getNavbar();
+$sidebar = $helper->getSidebar();
+$footer = $helper->getFooter();
 
+echo $header;
+echo $navbar;
 
+if(!isset($_SESSION['userid'])) {
+    die('<div class="inhalt">Bitte zuerst <a href="login.php">einloggen</a></div>');
+}elseif($_SESSION['admin']==0) {
+    die(header("Location: http://localhost/mitarbeiterverwaltung_bearbeiten.php"));
 
- <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-        <ul class="navbar-nav">
-            
-            </li>
+}else {
 
-            <span class="navbar-text">
-               <h3>Project Time Tool</h3>
-               <time></time>
-              </span>
+    echo $sidebar;
 
-
-    </nav>
-
-
-
- <!-- Load an icon library -->
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
- <!-- The sidebar -->
- <div class="sidebar">
-    <a href="zeiterfassung_startpage.php"><i class="fa fa-fw fa-clock"></i> Zeiterfassung</a>
-    <a href="projektverwaltung_startpage.php"><i class="fa fa-fw fa-wrench"></i> Projekt Verwaltung</a>
-    <a href="mitarbeiterverwaltung_startpage.php"><i class="fa fa-fw fa-user"></i> Mitarbeiter Verwaltung</a>
-    <a href="reporterstellen_startpage.php"><i class="fa fa-fw fa-file-export"></i> Report Erstellen</a><p></p>
- 
-  </div> 
-
-
-<!-- versuch Bild einzufügen-->
-<div class="logo">
-<img src="../../frontend/Kernkraftwer_Goesgen_Daeniken_AG.jpg" alt="Firmen Logo" class="img-fluid" width="300" >
-</div>
-
- 
-
-<form>
-    <div class="inhalt">
-        <h1>Was möchten sie tun?</h4><p></p>
-            <a href="mitarbeiterverwaltung_neu.php" class="btn btn-outline-dark" role="button">Mitarbeiter neu anlegen</a><p></p>
-    
-            <a href="mitarbeiterverwaltung_bearbeiten.php" class="btn btn-outline-dark" role="button">Mitarbeiter bearbeiten</a><p></p>
-       
-        </div>
-        </form>
+    echo '<div class="inhalt">';
+    echo '<h1>Was möchten sie tun?</h1>';
+    echo '<br><br>';
+    echo '<div class="form-group">';
+    echo '<a href="mitarbeiterverwaltung_bearbeiten.php" class="btn btn-outline-dark" role="button">Meine Daten ändern</a>';
+    echo '</div>';
+    echo '<div class="form-group">';
+    echo '<a href="mitarbeiterverwaltung_neu.php" class="btn btn-outline-dark" role="button">Mitarbeiter Daten ändern</a>';
+    echo '</div>';
+    echo '</div>';
+    echo $footer;
+}
 
 
 
-<div class="footer">
-<p></Footer></p>
-</div>
 
-</body>
 
-</html>
+
+

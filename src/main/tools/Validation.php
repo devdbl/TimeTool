@@ -26,6 +26,26 @@ class Validation
         return true;
     }
 
+    private function validateProject($input){
+        if (! isset($input['projectId'])) {
+            return false;
+        }
+        if (! isset($input['projectname'])) {
+            return false;
+        }
+        return true;
+    }
+
+    private function validateProjectUpdate($input){
+        if (! isset($input['projectname'])) {
+            return false;
+        }
+        if (! isset($input['isActive'])) {
+            return false;
+        }
+        return true;
+    }
+
     public function validateDate($data){
         if (! isset($data['startDate'])) {
             $month = strtotime("-1 Month");
@@ -36,4 +56,19 @@ class Validation
         }
         return $data;
     }
+
+    public function unprocessableEntityResponse(){
+        $response['status_code_header'] = 'HTTP/1.1 422 Unprocessable Entity';
+        $response['body'] = json_encode([
+            'error' => 'Invalid input'
+        ]);
+        return $response;
+    }
+
+    public function notFoundRequest(){
+        $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
+        $response['body'] = null;
+        return $response;
+    }
+
 }

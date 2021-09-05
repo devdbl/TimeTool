@@ -14,6 +14,7 @@ class Helper
                         <link href="./CSS/layout.css" type="text/css" rel="stylesheet" />
                         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
                         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+                        '.$scripts.'
                         <title>' . $title . '</title>
                     </head>
                     <body>
@@ -45,7 +46,7 @@ class Helper
     public static function getSidebar(){
         $sidebar = '<!-- The sidebar -->
                      <div class="sidebar">
-                        <a href="zeiterfassung_startpage.php"><i class="fa fa-fw fa-clock"></i> Zeiterfassung</a>
+                        <a href="zeiterfassung.php"><i class="fa fa-fw fa-clock"></i> Zeiterfassung</a>
                         <a href="projektverwaltung_startpage.php"><i class="fa fa-fw fa-wrench"></i> Projekt Verwaltung</a>
                         <a href="mitarbeiterverwaltung_startpage.php"><i class="fa fa-fw fa-user"></i> Mitarbeiter Verwaltung</a>
                         <a href="reporterstellen_startpage.php"><i class="fa fa-fw fa-file-export"></i> Report Erstellen</a><p></p>
@@ -56,12 +57,9 @@ class Helper
     }
 
     public static function getSidebarLandingPage(){
-        $sidebar = '<!-- Load an icon library -->
-                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-                    
-                     <!-- The sidebar -->
+        $sidebar = '<!-- The sidebar -->
                      <div class="sidebar">
-                        <a href="zeiterfassung_startpage.php"><i class="fa fa-fw fa-clock"></i> Zeiterfassung</a>
+                        <a href="zeiterfassung.php"><i class="fa fa-fw fa-clock"></i> Zeiterfassung</a>
                         <a href="projektverwaltung_startpage.php"><i class="fa fa-fw fa-wrench"></i> Projekt Verwaltung</a>
                         <a href="mitarbeiterverwaltung_startpage.php"><i class="fa fa-fw fa-user"></i> Mitarbeiter Verwaltung</a>
                         <a href="reporterstellen_startpage.php"><i class="fa fa-fw fa-file-export"></i> Report Erstellen</a><p></p>

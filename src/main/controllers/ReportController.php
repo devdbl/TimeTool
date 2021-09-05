@@ -1,6 +1,7 @@
 <?php
 
 require_once("../models/ReportGateway.php");
+require_once("../tools/Validation.php");
 
 class ReportController
 {
@@ -10,6 +11,7 @@ class ReportController
     private $dateArray;
     private $reportGateway;
     private $overview;
+    private $validation;
 
     public $dataArray;
 
@@ -22,6 +24,7 @@ class ReportController
         $this->dateArray = $dateArray;
         $this->overview = $overview;
         $this->reportGateway = new ReportGateway($db);
+        $this->validation = new Validation();
     }
 
     public function processRequest(){
@@ -43,16 +46,24 @@ class ReportController
             case 'WEB':
                 $response = $this->getTimeReportWeb();
                 break;
+            case 'ADD':
+                $response = $this->addReport();
+                break;
             default:
-                $response = $this->notFoundRequest();
+                $response = $this->validation->notFoundRequest();
                 break;
         }
         header($response['status_code_header']);
-        if ($response['body']) {
-            echo $response['body'];
-        }elseif ($response['web']){
-            $this->dataArray = $response['web'];
+        if($response['body']){
+            $this->dataArray = $response['body'];
         }
+    }
+
+    private function addReport(){
+        $this->reportGateway->add($_POST);
+        $response['status_code_header'] = 'HTTP/1.1 201 Created';
+        $response['body'] = null;
+        return $response;
     }
 
     private function addTimeReport(){
@@ -64,10 +75,10 @@ class ReportController
     }
 
     private function getTimeReport(){
-        $this->dateArray = $this->validateDate($this->dateArray);
+        $this->dateArray = $this->validation->validateDate($this->dateArray);
         $result = $this->reportGateway->selectAll($this->dateArray);
         if (! $result) {
-            return $this->notFoundRequest();
+            return $this->validation->notFoundRequest();
         }
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
@@ -75,25 +86,30 @@ class ReportController
     }
 
     private function getTimeReportWeb(){
-        $this->dateArray = $this->validateDate($this->dateArray);
-        $result = $this->reportGateway->selectAll($this->dateArray);
-        if (! $result) {
-            return $this->notFoundRequest();
-        }
-        $response['web'] = $result;
-        return $response;
-    }
-
-
-    private function getTimeReportUser(){
-        $this->dateArray = $this->validateDate($this->dateArray);
+        $this->dateArray = $this->validation->validateDate($this->dateArray);
         if($this->overview == 1){
             $result = $this->reportGateway->selectReportUserOverview($this->dateArray,$this->userId);
         }else{
             $result = $this->reportGateway->selectReportUser($this->dateArray,$this->userId);
         }
         if(! $result) {
-            return $this->notFoundRequest();
+            return $this->validation->notFoundRequest();
+        }
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = $result;
+        return $response;
+    }
+
+
+    private function getTimeReportUser(){
+        $this->dateArray = $this->validation->validateDate($this->dateArray);
+        if($this->overview == 1){
+            $result = $this->reportGateway->selectReportUserOverview($this->dateArray,$this->userId);
+        }else{
+            $result = $this->reportGateway->selectReportUser($this->dateArray,$this->userId);
+        }
+        if(! $result) {
+            return $this->validation->notFoundRequest();
         }
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
@@ -103,14 +119,14 @@ class ReportController
 
 
     private function getTimeReportProject(){
-        $this->dateArray = $this->validateDate($this->dateArray);
+        $this->dateArray = $this->validation->validateDate($this->dateArray);
         if($this->overview == 1){
             $result = $this->reportGateway->selectReportProjectOverview($this->dateArray,$this->projectId);
         }else{
             $result = $this->reportGateway->selectReportProject($this->dateArray,$this->projectId);
         }
         if (! $result) {
-            return $this->notFoundRequest();
+            return $this->validation->notFoundRequest();
         }
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
@@ -118,39 +134,13 @@ class ReportController
     }
 
     private function getTimeReportProjectUser(){
-        $this->dateArray = $this->validateDate($this->dateArray);
+        $this->dateArray = $this->validation->validateDate($this->dateArray);
         $result = $this->reportGateway->selectReportProjectUser($this->dateArray,$this->projectId,$this->userId);
         if (! $result) {
-            return $this->notFoundRequest();
+            return $this->validation->notFoundRequest();
         }
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
         return $response;
     }
-
-    private function validateDate($input){
-        if (! isset($input['startDate'])) {
-            $month = strtotime("-1 Month");
-            $input['startDate'] = date("Y-m-d",$month);
-        }
-        if (! isset($input['endDate'])) {
-            $input['endDate'] = date("Y-m-d");
-        }
-        return $input;
-    }
-
-    private function unprocessableEntityResponse(){
-        $response['status_code_header'] = 'HTTP/1.1 422 Unprocessable Entity';
-        $response['body'] = json_encode([
-            'error' => 'Invalid input'
-        ]);
-        return $response;
-    }
-
-    private function notFoundRequest(){
-        $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
-        $response['body'] = null;
-        return $response;
-    }
-
 }

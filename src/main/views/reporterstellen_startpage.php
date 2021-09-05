@@ -5,21 +5,29 @@ require_once("Helper.php");
 
 session_start();
 
+$script = '<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+           <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+           <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+           <script>
+               $(document).ready(function() {
+                   $("#report").DataTable();
+               } );
+           </script>';
 $helper = new Helper();
-$header = $helper->getHeader("Bericht erstellen");
+$header = $helper->getHeader("Bericht erstellen", $script);
 $navbar = $helper->getNavbar();
 $sidebar = $helper->getSidebar();
 $footer = $helper->getFooter();
 $showForm = true;
+$html = null;
+
+echo $header;
+echo $navbar;
 
 if(!isset($_SESSION['userid'])) {
-    header("HTTP/1.1 404 Not Found");
-    echo '<div class = "text"><a href="index.php">Startseite</a></div>';
-    exit();
+    die('<div class="inhalt">Bitte zuerst <a href="login.php">einloggen</a></div>');
 }else {
 
-    echo $header;
-    echo $navbar;
     echo $sidebar;
 
     if(isset($_GET['report'])) {
@@ -27,13 +35,15 @@ if(!isset($_SESSION['userid'])) {
         $userId = null;
         $dateArray['startDate'] = null;
         $dateArray['endDate'] = null;
+        $overview = 1;
+        $requestMethod = 'WEB';
         $showForm = false;
 
         if (isset($_POST['projectId'])) {
             $projectId = $_POST['projectId'];
         }
-        if (isset($_POST['userId'])) {
-            $userId = $_POST['userId'];
+        if (isset($_SESSION['userid'])) {
+            $userId = $_SESSION['userid'];
         }
         if (isset($_POST['startDate'])) {
             $dateArray['startDate'] = $_POST['startDate'];
@@ -42,21 +52,25 @@ if(!isset($_SESSION['userid'])) {
             $dateArray['endDate'] = $_POST['endDate'];
         }
 
-        $requestMethod = 'GET';
-
         $dbConnection = (new DatabaseConnector())->connect();
 
-        $reportController = new ReportController($dbConnection, $requestMethod, $projectId, $userId, $dateArray);
+        $reportController = new ReportController($dbConnection, $requestMethod, $projectId, $userId, $dateArray, $overview);
         $reportController->processRequest();
 
-        /*echo "<div class='inhalt'</div>";
+        echo "<div class='inhalt'</div>";
         echo "<h1>Buchungsstatistik</h1>";
         echo "<h2>Total pro Mitarbeiter</h2>";
-        echo "<table class='table table-bordered table-sm'>";
-        echo "<thead><tr><th>Mitarbeiter</th><th>Projekte</th></tr></thead>";
+        echo "<table id='report' class='table table-bordered table-sm'>";
+        echo "<thead><tr><th>Mitarbeiter</th><th>Projekt</th><th>Zeit</th></tr></thead>";
+        $sum = 0;
+        echo "<tbody>";
         foreach($reportController->dataArray as $row){
-            "<tr><td>".$row["Jahr"]."</td><td>".$row["Total"]."</td></tr>";
-        }*/
+            $html .= "<tr><td>".$row["EMPLOYEE_ID"]."</td><td>".$row["PROJECT_ID"]."</td><td>".$row["SUM(TIME)"]."</td></tr>";
+            $sum++;
+        }
+        $html .= "</tbody></table>";
+        echo $html;
+
     }
 
     if(isset($errorMessage)) {
