@@ -1,6 +1,7 @@
 <?php
 
 require_once("../models/EmployeeGateway.php");
+require_once("../tools/Validation.php");
 
 class EmployeeController{
 
@@ -8,6 +9,7 @@ class EmployeeController{
     private $requestMethod;
     private $userId;
     private $employeeGateway;
+    private $validation;
 
     public $dataArray;
 
@@ -17,6 +19,7 @@ class EmployeeController{
         $this->requestMethod = $requestMethod;
         $this->userId = $userId;
         $this->employeeGateway = new EmployeeGateway($db);
+        $this->validation = new Validation();
     }
 
     public function processRequest(){
@@ -38,7 +41,7 @@ class EmployeeController{
                 $response = $this->deleteUser($this->userId);
                 break;
             default:
-                $response = $this->notFoundRequest();
+                $response = $this->validation->notFoundRequest();
                 break;
         }
         header($response['status_code_header']);
@@ -57,7 +60,7 @@ class EmployeeController{
     private function getUser($personalId){
         $result = $this->employeeGateway->select($personalId);
         if (! $result) {
-            return $this->notFoundRequest();
+            return $this->validation->notFoundRequest();
         }
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
@@ -65,9 +68,9 @@ class EmployeeController{
     }
 
     private function createUser(){
-        $input = $_POST;
-        if (! $this->validatePerson($input)) {
-            return $this->unprocessableEntityResponse();
+        $input = $this->validation->validateInput($_POST);
+        if (! $this->validation->validatePerson($input)) {
+            return $this->validation->unprocessableEntityResponse();
         }
         $this->employeeGateway->add($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
@@ -78,11 +81,11 @@ class EmployeeController{
     private function updateUser($personalId){
         $result = $this->employeeGateway->select($personalId);
         if (! $result) {
-            return $this->notFoundRequest();
+            return $this->validation->notFoundRequest();
         }
         $input = $_POST;
-        if (! $this->validatePerson($input)) {
-            return $this->unprocessableEntityResponse();
+        if (! $this->validation->validatePerson($input)) {
+            return $this->validation->unprocessableEntityResponse();
         }
         $this->employeeGateway->update($personalId, $input);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
@@ -93,30 +96,4 @@ class EmployeeController{
     private function deleteUser($personalId){
         echo "Funktioniert nicht: es wäre der Mitarbeiter mit der Personalnummer ".$personalId. " gelöscht worden";
     }
-
-    private function validatePerson($input){
-        if (! isset($input['firstname'])) {
-            return false;
-        }
-        if (! isset($input['lastname'])) {
-            return false;
-        }
-        return true;
-    }
-
-    private function unprocessableEntityResponse(){
-        $response['status_code_header'] = 'HTTP/1.1 422 Unprocessable Entity';
-        $response['body'] = json_encode([
-            'error' => 'Invalid input'
-        ]);
-        return $response;
-    }
-
-    private function notFoundRequest(){
-        $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
-        $response['body'] = null;
-        return $response;
-    }
-
-
 }
