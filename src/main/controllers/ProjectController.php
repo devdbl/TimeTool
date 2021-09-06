@@ -75,7 +75,7 @@ class ProjectController{
     }
 
     private function createProject(){
-        $input = $_POST;
+        $input = $this->validation->validateInput($_POST);
         if (! $this->validation->validateProject($input)) {
             return $this->validation->unprocessableEntityResponse();
         }
@@ -90,7 +90,7 @@ class ProjectController{
         if (! $result) {
             return $this->validation->notFoundRequest();
         }
-        $input = $_POST;
+        $input = $this->validation->validateInput($_POST);
         if (! $this->validation->validateProjectUpdate($input)) {
             return $this->validation->unprocessableEntityResponse();
         }
