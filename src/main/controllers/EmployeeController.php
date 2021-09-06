@@ -83,7 +83,7 @@ class EmployeeController{
         if (! $result) {
             return $this->validation->notFoundRequest();
         }
-        $input = $_POST;
+        $input = $this->validation->validateInput($_POST);
         if (! $this->validation->validatePerson($input)) {
             return $this->validation->unprocessableEntityResponse();
         }
