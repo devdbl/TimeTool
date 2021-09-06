@@ -1,5 +1,6 @@
 <?php
 require_once("../tools/DatabaseConnector.php");
+require_once("../tools/Validation.php");
 require_once ("Helper.php");
 
 session_start();
@@ -8,6 +9,7 @@ $helper = new Helper();
 $header = $helper->getHeader("Login");
 $navbar = $helper->getNavbar();
 $footer = $helper->getFooter();
+$valid = new Validation();
 
 $db = (new DatabaseConnector())->connect();
 
@@ -18,12 +20,12 @@ $showForm = true; //Variable ob das Registrierungsformular anezeigt werden soll
 
 if(isset($_GET['register'])) {
     $error = false;
-    $personalId = $_POST['personalId'];
-    $shortname = $_POST['shortname'];
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $password = $_POST['password'];
-    $password2 = $_POST['password2'];
+    $personalId =$valid->validateInput($_POST['personalId']);
+    $shortname = $valid->validateInput($_POST['shortname']);
+    $firstname = $valid->validateInput($_POST['firstname']);
+    $lastname = $valid->validateInput($_POST['lastname']);
+    $password = $valid->validateInput($_POST['password']);
+    $password2 = $valid->validateInput($_POST['password2']);
 
     if(strlen($password) == 0) {
         echo 'Bitte ein Passwort angeben<br>';
