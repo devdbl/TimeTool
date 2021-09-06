@@ -60,7 +60,8 @@ class ReportController
     }
 
     private function addReport(){
-        $this->reportGateway->add($_POST);
+        $input = $_POST;
+        $this->reportGateway->add($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
         $response['body'] = null;
         return $response;
