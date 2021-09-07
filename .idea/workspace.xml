@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e093998e-49d9-4d65-849e-9fd060312824" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/tools/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/tools/DatabaseConnector.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/tools/DatabaseConnector.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +36,7 @@
     <setting file="file://$PROJECT_DIR$/src/main/models/EmployeeGateway.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/vendor/autoload.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
   </component>
-  <component name="PhpDebugGeneral" listening_started="true" show_user_defined_constants="false" />
+  <component name="PhpDebugGeneral" show_user_defined_constants="false" />
   <component name="PhpServers">
     <servers>
       <server host="localhost" id="32af7d03-00c1-4181-a109-e41e6aa20620" name="localhost" />
