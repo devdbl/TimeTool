@@ -33,8 +33,6 @@ class Helper
                                    <h3>Project Time Tool</h3>
                                    <time></time>
                                   </span>
-                    
-                    
                     </nav>       
                     <!--Bild einzufügen-->
                     <div class="logo">
@@ -47,11 +45,11 @@ class Helper
         $sidebar = '<!-- The sidebar -->
                      <div class="sidebar">
                         <a href="zeiterfassung.php"><i class="fa fa-fw fa-clock"></i> Zeiterfassung</a>
-                        <a href="projektverwaltung_startpage.php"><i class="fa fa-fw fa-wrench"></i> Projekt Verwaltung</a>
                         <a href="mitarbeiterverwaltung_startpage.php"><i class="fa fa-fw fa-user"></i> Mitarbeiter Verwaltung</a>
                         <a href="reporterstellen_startpage.php"><i class="fa fa-fw fa-file-export"></i> Report Erstellen</a>
-                        <br><br><br><br>
-                        <a href="logout.php"><i class="far fa-caret-square-left"></i></i>LOGOUT</a>
+                        <a href="projektverwaltung_startpage.php"><i class="fa fa-fw fa-wrench"></i> Projekt Verwaltung</a>
+                        <br><br><br><br><br><br><br><br>
+                        <a href="logout.php"><i class="far fa-caret-square-left"></i></i> LOGOUT</a>
                      </div>';
         return $sidebar;
     }
