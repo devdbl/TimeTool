@@ -1,5 +1,5 @@
 <?php
-
+require '../../../vendor/autoload.php';
 
 class DatabaseConnector {
 
@@ -7,17 +7,19 @@ class DatabaseConnector {
 
     public function __construct()
     {
-        $host = 'localhost';//getenv('DB_HOST');
-        $port = 3306;       //getenv('DB_PORT');
-        $db   = 'timetool'; //getenv('DB_DATABASE');
-        $user = 'root';     //getenv('DB_USERNAME');
-        $pass = '';         //getenv('DB_PASSWORD');
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+        $dotenv->load();
+        $host = $_ENV['DB_HOST'];
+        $port = $_ENV['DB_PORT'];
+        $db   = $_ENV['DB_DATABASE'];
+        $user = $_ENV['DB_USERNAME'];
+        $password = $_ENV['DB_PASSWORD'];
 
         try {
             $this->dbConnection = new \PDO(
                 "mysql:host=$host;port=$port;charset=utf8mb4;dbname=$db",
                 $user,
-                $pass
+                $password
             );
         } catch (\PDOException $e) {
             exit($e->getMessage());
