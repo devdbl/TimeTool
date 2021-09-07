@@ -16,9 +16,13 @@ $error = false;
 echo $header;
 echo $navbar;
 
-/*if(!isset($_SESSION['userid'])) {
+if(!isset($_SESSION['userid'])) {
     die('<div class="inhalt">Bitte zuerst <a href="login.php">einloggen</a></div>');
-}else {*/
+}elseif($_SESSION['ip'] != $_SERVER['REMOTE_ADDR']) {
+    session_unset();
+    session_destroy();
+    setcookie(session_name(),"invalid",0,"/");
+}else {
 
     echo $sidebar;
 

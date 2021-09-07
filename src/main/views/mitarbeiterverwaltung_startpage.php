@@ -18,6 +18,10 @@ if(!isset($_SESSION['userid'])) {
 }elseif($_SESSION['admin']==0) {
     die(header("Location: http://localhost/mitarbeiterverwaltung_bearbeiten.php"));
 
+}elseif($_SESSION['ip'] != $_SERVER['REMOTE_ADDR']) {
+    session_unset();
+    session_destroy();
+    setcookie(session_name(),"invalid",0,"/");
 }else {
 
     echo $sidebar;
