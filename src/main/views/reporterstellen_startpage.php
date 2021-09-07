@@ -8,11 +8,8 @@ session_start();
 $script = '<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
            <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
            <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-           <script>
-               $(document).ready(function() {
-                   $("#report").DataTable();
-               } );
-           </script>';
+           <script src="JS/DataTable.js"></script>';
+
 $helper = new Helper();
 $header = $helper->getHeader("Bericht erstellen", $script);
 $navbar = $helper->getNavbar();
