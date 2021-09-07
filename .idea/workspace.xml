@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e093998e-49d9-4d65-849e-9fd060312824" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/tools/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/views/Helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/Helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/views/logout.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/logout.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/views/mitarbeiterverwaltung_bearbeiten.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/mitarbeiterverwaltung_bearbeiten.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/views/startseite.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/views/zeiterfassung_login.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/views/zeiterfassung_startpage.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/tools/DatabaseConnector.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/tools/DatabaseConnector.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,12 +37,11 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/api/employee.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/controllers/EmployeeController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/models/EmployeeGateway.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/vendor/autoload.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
   </component>
-  <component name="PhpDebugGeneral" show_user_defined_constants="false" />
+  <component name="PhpDebugGeneral" listening_started="true" show_user_defined_constants="false" />
   <component name="PhpServers">
     <servers>
       <server host="localhost" id="32af7d03-00c1-4181-a109-e41e6aa20620" name="localhost" />
@@ -89,19 +86,11 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/cli-parser" />
       <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
       <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
-      <path value="$PROJECT_DIR$/vendor/auth0/auth0-php" />
-      <path value="$PROJECT_DIR$/vendor/auth0/php-jwt" />
       <path value="$PROJECT_DIR$/vendor/graham-campbell/result-type" />
-      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
-      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
-      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
-      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
-      <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/vendor/twbs/bootstrap" />
     </include_path>
   </component>
   <component name="ProjectId" id="1wl6ZMyNkflPQ1Lmaf8eAaIYMUO" />
@@ -125,11 +114,11 @@
       <recent name="C:\Users\admin\Documents\GitHub\TimeTool\src\main\controllers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\admin\GitHub\TimeTool\src\main\tools" />
       <recent name="C:\Users\admin\GitHub\TimeTool\src\main\views" />
       <recent name="C:\Users\admin\GitHub\TimeTool\src\main\views\CSS" />
       <recent name="C:\Users\admin\Documents\GitHub\TimeTool\src" />
       <recent name="C:\Users\admin\Documents\GitHub\TimeTool\src\main" />
-      <recent name="C:\Users\admin\Documents\GitHub\TimeTool" />
     </key>
   </component>
   <component name="RunManager" selected="PHPUnit.ValidationTest">
@@ -186,10 +175,8 @@
       <workItem from="1629820775658" duration="585000" />
       <workItem from="1629821385591" duration="3075000" />
       <workItem from="1629874707470" duration="20000" />
-
       <workItem from="1629874747902" duration="4478000" />
       <workItem from="1629882884361" duration="792000" />
-
     </task>
     <servers />
   </component>
@@ -221,8 +208,15 @@
           <line>89</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
-
-
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/src/main/tools/DatabaseConnector.php</url>
+          <line>7</line>
+          <properties>
+            <option name="className" value="\DatabaseConnector" />
+            <option name="methodName" value="__construct" />
+          </properties>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
