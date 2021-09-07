@@ -2,7 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e093998e-49d9-4d65-849e-9fd060312824" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/api/project.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/views/JS/getProject.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/views/projektverwaltung_auswahl.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/Helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/Helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/mitarbeiterverwaltung_bearbeiten.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/mitarbeiterverwaltung_bearbeiten.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/mitarbeiterverwaltung_startpage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/mitarbeiterverwaltung_startpage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/projektverwaltung_bearbeiten.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/projektverwaltung_bearbeiten.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/projektverwaltung_neu.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/projektverwaltung_neu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/projektverwaltung_startpage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/projektverwaltung_startpage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/reporterstellen_startpage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/reporterstellen_startpage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/views/zeiterfassung.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/views/zeiterfassung.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +32,7 @@
       <list>
         <option value="CSS File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -203,14 +216,15 @@
           <line>89</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="php-line-method">
-          <url>file://$PROJECT_DIR$/src/main/tools/DatabaseConnector.php</url>
-          <line>7</line>
-          <properties>
-            <option name="className" value="\DatabaseConnector" />
-            <option name="methodName" value="__construct" />
-          </properties>
-          <option name="timeStamp" value="27" />
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/main/views/index.php</url>
+          <line>3</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/main/views/projektverwaltung_auswahl.php</url>
+          <line>19</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
