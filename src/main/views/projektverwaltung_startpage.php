@@ -7,7 +7,7 @@ session_start();
 $helper = new Helper();
 $header = $helper->getHeader("Projekt Mutation");
 $navbar = $helper->getNavbar();
-$sidebar = $helper->getSidebar();
+$sidebar = $helper->getSidebar($_SESSION['admin']);
 $footer = $helper->getFooter();
 
 echo $header;
@@ -30,7 +30,7 @@ if(!isset($_SESSION['userid'])) {
     echo '<a href="projektverwaltung_neu.php" class="btn btn-outline-dark" role="button">Projekt erfassen</a>';
     echo '</div>';
     echo '<div class="form-group">';
-    echo '<a href="projektverwaltung_bearbeiten.php" class="btn btn-outline-dark" role="button">Projekt Daten ändern</a>';
+    echo '<a href="projektverwaltung_auswahl.php" class="btn btn-outline-dark" role="button">Projekt Daten ändern</a>';
     echo '</div>';
     echo '</div>';
 

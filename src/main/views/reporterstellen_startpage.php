@@ -13,7 +13,7 @@ $script = '<script type="text/javascript" src="https://code.jquery.com/jquery-3.
 $helper = new Helper();
 $header = $helper->getHeader("Bericht erstellen", $script);
 $navbar = $helper->getNavbar();
-$sidebar = $helper->getSidebar();
+$sidebar = $helper->getSidebar($_SESSION['admin']);
 $footer = $helper->getFooter();
 $showForm = true;
 $html = null;

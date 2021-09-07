@@ -8,7 +8,7 @@ session_start();
 $helper = new Helper();
 $header = $helper->getHeader("Mitarbeiter verwalten");
 $navbar = $helper->getNavbar();
-$sidebar = $helper->getSidebar();
+$sidebar = $helper->getSidebar($_SESSION['admin']);
 $footer = $helper->getFooter();
 $showForm = true;
 $error = false;

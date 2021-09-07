@@ -7,7 +7,7 @@ session_start();
 $helper = new Helper();
 $header = $helper->getHeader("Mutation");
 $navbar = $helper->getNavbar();
-$sidebar = $helper->getSidebar();
+$sidebar = $helper->getSidebar($_SESSION['admin']);
 $footer = $helper->getFooter();
 
 echo $header;
