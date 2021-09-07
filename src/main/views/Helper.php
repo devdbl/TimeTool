@@ -50,7 +50,6 @@ class Helper
                         <a href="projektverwaltung_startpage.php"><i class="fa fa-fw fa-wrench"></i> Projekt Verwaltung</a>
                         <a href="mitarbeiterverwaltung_startpage.php"><i class="fa fa-fw fa-user"></i> Mitarbeiter Verwaltung</a>
                         <a href="reporterstellen_startpage.php"><i class="fa fa-fw fa-file-export"></i> Report Erstellen</a>
-                        <a href="mitarbeiterverwaltung_startpage.php"><i class="far fa-caret-square-left"></i></i> Zurück</a>
                         <br><br><br><br>
                         <a href="logout.php"><i class="far fa-caret-square-left"></i></i>LOGOUT</a>
                      </div>';
