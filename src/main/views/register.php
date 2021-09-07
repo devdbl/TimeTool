@@ -1,5 +1,6 @@
 <?php
 require_once("../tools/DatabaseConnector.php");
+require_once("../tools/Validation.php");
 require_once ("Helper.php");
 
 session_start();
@@ -8,6 +9,7 @@ $helper = new Helper();
 $header = $helper->getHeader("Login");
 $navbar = $helper->getNavbar();
 $footer = $helper->getFooter();
+$valid = new Validation();
 
 $db = (new DatabaseConnector())->connect();
 
@@ -18,17 +20,13 @@ $showForm = true; //Variable ob das Registrierungsformular anezeigt werden soll
 
 if(isset($_GET['register'])) {
     $error = false;
-    $personalId = $_POST['personalId'];
-    $shortname = $_POST['shortname'];
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $password = $_POST['password'];
-    $password2 = $_POST['password2'];
+    $personalId =$valid->validateInput($_POST['personalId']);
+    $shortname = $valid->validateInput($_POST['shortname']);
+    $firstname = $valid->validateInput($_POST['firstname']);
+    $lastname = $valid->validateInput($_POST['lastname']);
+    $password = $valid->validateInput($_POST['password']);
+    $password2 = $valid->validateInput($_POST['password2']);
 
-    if(!is_numeric($personalId)) {
-        echo 'Bitte eine gültige Personalnummer eingeben<br>';
-        $error = true;
-    }
     if(strlen($password) == 0) {
         echo 'Bitte ein Passwort angeben<br>';
         $error = true;
@@ -76,28 +74,28 @@ echo
     <h1>Anmeldung beim TimeTool</h1>
     <form action="?register=1" method="post">
         <div class="form-group">
-            <label for="fistname">Vorname</label>
-            <input type="text" class="form-control" id="fistname" name="firstname">
+            <label for="firstname">Vorname</label>
+            <input type="text" class="form-control" id="firstname" required maxlength="45" name="firstname">
         </div>
         <div class="form-group">
             <label for="lastname">Nachname</label>
-            <input type="text" class="form-control" id="lastname" name="lastname">
+            <input type="text" class="form-control" id="lastname" required maxlength="45" name="lastname">
         </div>
         <div class="form-group">
             <label for="id">Mitarbeiter ID</label>
-            <input type="number" class="form-control" id="id" name="personalId">
+            <input type="number" class="form-control" id="id" required name="personalId">
         </div>
         <div class="form-group">
             <label for="shortname">Benutzername</label>
-            <input type="text" class="form-control" id="shortname" name="shortname">
+            <input type="text" class="form-control" id="shortname" required maxlength="4" name="shortname">
         </div>
         <div class="form-group">
             <label for="pwd">Passwort</label>
-            <input type="password" class="form-control" id="pwd" name="password">
+            <input type="password" class="form-control" id="pwd" required name="password">
         </div>
         <div class="form-group">
             <label for="pwd2">Passwort wiederholen</label>
-            <input type="password" class="form-control" id="pwd2" name="password2">
+            <input type="password" class="form-control" id="pwd2" required name="password2">
         </div>
         <input type="submit" class="btn btn-info" value="Anmeldung abschliessen">
     </form>
