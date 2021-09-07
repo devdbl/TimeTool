@@ -68,7 +68,7 @@ class EmployeeController{
     }
 
     private function createUser(){
-        $input = $this->validation->validateInput($_POST);
+        $input = $_POST;
         if (! $this->validation->validatePerson($input)) {
             return $this->validation->unprocessableEntityResponse();
         }

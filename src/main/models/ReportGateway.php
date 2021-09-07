@@ -55,19 +55,16 @@ class ReportGateway
     }
 
     public function selectReportUserOverview($dateArray, $userId){
-        $statement = "SELECT
-                        PROJECT_ID,EMPLOYEE_ID,SUM(TIME) 
-                      FROM
-                        time
-                      WHERE (REPORTDATE BETWEEN :start AND :end)
-                      AND EMPLOYEE_ID = :userId
-                      GROUP BY PROJECT_ID";
+        $statement = "  SELECT time.PROJECT_ID,employee.SHORTNAME,employee.FIRSTNAME,employee.LASTNAME,SUM(time.TIME) FROM `time` 
+                        LEFT JOIN employee ON time.EMPLOYEE_ID=employee.EMPLOYEE_ID 
+                        WHERE (REPORTDATE BETWEEN :start AND :end) 
+                        GROUP BY employee.SHORTNAME,time.PROJECT_ID
+                        ORDER BY time.PROJECT_ID ASC";
         try {
             $statement = $this->db->prepare($statement);
             $statement->execute(array(
                 'start' => $dateArray['startDate'],
-                'end'   => $dateArray['endDate'],
-                'userId'=> $userId
+                'end'   => $dateArray['endDate']
             ));
             return $statement->fetchAll(\PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
