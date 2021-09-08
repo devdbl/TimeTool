@@ -65,11 +65,11 @@ if(!isset($_SESSION['userid'])) {
                 <form action="?add" method="post">
                     <div class="form-group">
                         <label for="projectName">Projektname:</label>
-                        <input type="text" class="form-control" id="projectName" name="projectname">
+                        <input type="text" class="form-control" id="projectName" required maxlength="20" name="projectname">
                     </div>
                     <div class="form-group">
                         <label for="projectId">Projekt Nummer:</label>
-                        <input type="number" class="form-control" id="projectId" name="projectId">
+                        <input type="number" class="form-control" id="projectId" required name="projectId">
                     </div>
                     <div class="form-group">
                         <label for="description">Beschreibung</label>
