@@ -46,7 +46,7 @@ class EmployeeController{
         }
         header($response['status_code_header']);
         if ($response['body']) {
-            $this->dataArray = $response['body'];
+            echo $response['body'];
         }
     }
 

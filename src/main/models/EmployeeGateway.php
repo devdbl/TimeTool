@@ -15,7 +15,7 @@ class EmployeeGateway
 
     public function selectAll(){
         $statement = "SELECT
-                        EMPLOYEE_ID,FIRSTNAME,LASTNAME,SHORTNAME
+                        EMPLOYEE_ID,FIRSTNAME,LASTNAME,SHORTNAME,ROLE
                       FROM
                         employee
                       ORDER BY
