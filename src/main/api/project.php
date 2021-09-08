@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
 
 $getDeactivatedProjects = null;
 if (isset($_GET['getDeactivatedProjects'])){
-    $getDeactivatedProjects = $_GET['getDeactivatedProjects'];
+    $getDeactivatedProjects = $_GET['getDeactivatedProjects']  == 'true' ? true : false;
 }
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
