@@ -5,10 +5,10 @@ require_once("Helper.php");
 session_start();
 
 $script = ' <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
-            <script src="JS/getProject.js"></script>';
+            <script src="JS/getProjects.js"></script>';
 
 $helper = new Helper();
-$header = $helper->getHeader("Projekt auswahl");
+$header = $helper->getHeader("Projekt auswahl", $script);
 $navbar = $helper->getNavbar();
 $sidebar = $helper->getSidebar($_SESSION['admin']);
 $footer = $helper->getFooter();
@@ -37,7 +37,7 @@ if(!isset($_SESSION['userid'])) {
             
             <br><br>
                  
-            <form action="?get" method="get">
+            <form action="projektverwaltung_bearbeiten.php" method="get">
                 <div class="form-group">
                     <label for="projectId">Projektnummer:</label>
                     <input type="text" class="form-control" id="projectId" required name="projectId">
