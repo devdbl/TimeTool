@@ -45,7 +45,7 @@ class Helper
         $sidebar = '<!-- The sidebar -->
                      <div class="sidebar">
                         <a href="zeiterfassung.php"><i class="fa fa-fw fa-clock"></i> Zeiterfassung</a>
-                        <a href="mitarbeiterverwaltung_startpage.php"><i class="fa fa-fw fa-user"></i> Mitarbeiter Verwaltung</a>';
+                        <a href="mitarbeiterverwaltung_bearbeiten.php"><i class="fa fa-fw fa-user"></i> Mitarbeiter Verwaltung</a>';
         if($isAdmin == 1) {
             $sidebar .= '<a href="projektverwaltung_startpage.php"><i class="fa fa-fw fa-file-export"></i> Projekt Verwaltung</a>';
         }
