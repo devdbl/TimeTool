@@ -8,7 +8,7 @@ session_start();
 $helper = new Helper();
 $header = $helper->getHeader("Projekt anlegen");
 $navbar = $helper->getNavbar();
-$sidebar = $helper->getSidebar();
+$sidebar = $helper->getSidebar($_SESSION['admin']);
 $footer = $helper->getFooter();
 $showForm = true;
 $error = false;
@@ -16,9 +16,13 @@ $error = false;
 echo $header;
 echo $navbar;
 
-/*if(!isset($_SESSION['userid'])) {
+if(!isset($_SESSION['userid'])) {
     die('<div class="inhalt">Bitte zuerst <a href="login.php">einloggen</a></div>');
-}else {*/
+}elseif($_SESSION['ip'] != $_SERVER['REMOTE_ADDR']) {
+    session_unset();
+    session_destroy();
+    setcookie(session_name(),"invalid",0,"/");
+}else {
 
     echo $sidebar;
 
@@ -61,11 +65,11 @@ echo $navbar;
                 <form action="?add" method="post">
                     <div class="form-group">
                         <label for="projectName">Projektname:</label>
-                        <input type="text" class="form-control" id="projectName" name="projectname">
+                        <input type="text" class="form-control" id="projectName" required maxlength="20" name="projectname">
                     </div>
                     <div class="form-group">
                         <label for="projectId">Projekt Nummer:</label>
-                        <input type="number" class="form-control" id="projectId" name="projectId">
+                        <input type="number" class="form-control" id="projectId" required name="projectId">
                     </div>
                     <div class="form-group">
                         <label for="description">Beschreibung</label>
@@ -75,4 +79,4 @@ echo $navbar;
                 </form>';
     }
     echo $footer;
-//}
+}

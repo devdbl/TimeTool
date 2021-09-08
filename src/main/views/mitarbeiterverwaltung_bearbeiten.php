@@ -5,10 +5,13 @@ require_once ("Helper.php");
 
 session_start();
 
+$script = ' <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+            <script src="JS/getEmployees.js"></script>';
+
 $helper = new Helper();
-$header = $helper->getHeader("Mitarbeiter verwalten");
+$header = $helper->getHeader("Mitarbeiter verwalten", $script);
 $navbar = $helper->getNavbar();
-$sidebar = $helper->getSidebar();
+$sidebar = $helper->getSidebar($_SESSION['admin']);
 $footer = $helper->getFooter();
 $showForm = true;
 $error = false;
@@ -18,6 +21,10 @@ echo $navbar;
 
 if(!isset($_SESSION['userid'])) {
     die('<div class="inhalt">Bitte zuerst <a href="login.php">einloggen</a></div>');
+}elseif($_SESSION['ip'] != $_SERVER['REMOTE_ADDR']) {
+    session_unset();
+    session_destroy();
+    setcookie(session_name(),"invalid",0,"/");
 }else {
 
     echo $sidebar;
@@ -26,6 +33,10 @@ if(!isset($_SESSION['userid'])) {
         $userId = $_SESSION['userid'];
         $showForm = false;
         $requestMethod = 'PUT';
+
+        if(isset($_POST['personalId'])){
+            $userId = $_POST['personalId'];
+        }
 
         if(strlen($_POST['password1']) == 0) {
             echo 'Bitte ein Passwort angeben<br>';
@@ -47,7 +58,16 @@ if(!isset($_SESSION['userid'])) {
         }
     }
 
-
+    if ($_SESSION['admin'] == 1) {
+        echo '  <div class="inhalt">
+                <button id="showEmployee" class="btn btn-info">Mitarbeiter anzeigen</button>
+                <br><br>
+                <h3>Mitarbeiter</h3>
+                <ol id="employeeList"></ol>       
+                
+                <br><br>
+                </div>';
+    }
 
 
     if($showForm) {
@@ -57,22 +77,27 @@ if(!isset($_SESSION['userid'])) {
                 <form action="?edit" method="post">
                     <div class="form-group">
                         <label for="firstname">Vorname</label>
-                        <input type="text" class="form-control" id="firstname" name="firstname">
+                        <input type="text" class="form-control" id="firstname" required maxlength="20" name="firstname">
                     </div>
                     <div class="form-group">
                         <label for="lastname">Nachname</label>
-                        <input type="text" class="form-control" id="lastname" name="lastname">
+                        <input type="text" class="form-control" id="lastname" required maxlength="20" name="lastname">
                     </div>
                     <div class="form-group">
                         <label for="pwd">Passwort</label>
-                        <input type="password" class="form-control" id="pwd" name="password1">
+                        <input type="password" class="form-control" id="pwd" required name="password1">
                     </div>
                     <div class="form-group">
                         <label for="pwd2">Passwort wiederholen</label>
                         <input type="password" class="form-control" id="pwd2" name="password2">
                     </div>';
         if ($_SESSION['admin'] == 1) {
-            echo '<div class="custom-control custom-checkbox mb-3">
+            echo '
+                <div class="form-group">
+                    <label for="id">Mitarbeiter ID</label>
+                    <input type="number" class="form-control" id="id" required name="personalId">
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
                     <input type="checkbox" class="custom-control-input" id="customCheck" name="role">
                     <label class="custom-control-label" for="customCheck">Administrator</label>
                 </div>';

@@ -7,7 +7,7 @@ session_start();
 $helper = new Helper();
 $header = $helper->getHeader("Projekt Mutation");
 $navbar = $helper->getNavbar();
-$sidebar = $helper->getSidebar();
+$sidebar = $helper->getSidebar($_SESSION['admin']);
 $footer = $helper->getFooter();
 
 echo $header;
@@ -15,6 +15,10 @@ echo $navbar;
 
 if(!isset($_SESSION['userid'])) {
     die('<div class="inhalt">Bitte zuerst <a href="login.php">einloggen</a></div>');
+}elseif($_SESSION['ip'] != $_SERVER['REMOTE_ADDR']) {
+    session_unset();
+    session_destroy();
+    setcookie(session_name(),"invalid",0,"/");
 }else {
 
     echo $sidebar;
@@ -26,7 +30,7 @@ if(!isset($_SESSION['userid'])) {
     echo '<a href="projektverwaltung_neu.php" class="btn btn-outline-dark" role="button">Projekt erfassen</a>';
     echo '</div>';
     echo '<div class="form-group">';
-    echo '<a href="projektverwaltung_bearbeiten.php" class="btn btn-outline-dark" role="button">Projekt Daten ändern</a>';
+    echo '<a href="projektverwaltung_auswahl.php" class="btn btn-outline-dark" role="button">Projekt Daten ändern</a>';
     echo '</div>';
     echo '</div>';
 

@@ -33,8 +33,6 @@ class Helper
                                    <h3>Project Time Tool</h3>
                                    <time></time>
                                   </span>
-                    
-                    
                     </nav>       
                     <!--Bild einzufügen-->
                     <div class="logo">
@@ -43,27 +41,16 @@ class Helper
         return $navbar;
     }
 
-    public static function getSidebar(){
+    public static function getSidebar($isAdmin){
         $sidebar = '<!-- The sidebar -->
                      <div class="sidebar">
                         <a href="zeiterfassung.php"><i class="fa fa-fw fa-clock"></i> Zeiterfassung</a>
-                        <a href="projektverwaltung_startpage.php"><i class="fa fa-fw fa-wrench"></i> Projekt Verwaltung</a>
-                        <a href="mitarbeiterverwaltung_startpage.php"><i class="fa fa-fw fa-user"></i> Mitarbeiter Verwaltung</a>
-                        <a href="reporterstellen_startpage.php"><i class="fa fa-fw fa-file-export"></i> Report Erstellen</a><p></p>
-                     
-                        <a href="mitarbeiterverwaltung_startpage.php"><i class="far fa-caret-square-left"></i></i> Zurück</a>
-                     </div>';
-        return $sidebar;
-    }
-
-    public static function getSidebarLandingPage(){
-        $sidebar = '<!-- The sidebar -->
-                     <div class="sidebar">
-                        <a href="zeiterfassung.php"><i class="fa fa-fw fa-clock"></i> Zeiterfassung</a>
-                        <a href="projektverwaltung_startpage.php"><i class="fa fa-fw fa-wrench"></i> Projekt Verwaltung</a>
-                        <a href="mitarbeiterverwaltung_startpage.php"><i class="fa fa-fw fa-user"></i> Mitarbeiter Verwaltung</a>
-                        <a href="reporterstellen_startpage.php"><i class="fa fa-fw fa-file-export"></i> Report Erstellen</a><p></p>
-                     
+                        <a href="mitarbeiterverwaltung_bearbeiten.php"><i class="fa fa-fw fa-user"></i> Mitarbeiter Verwaltung</a>';
+        if($isAdmin == 1) {
+            $sidebar .= '<a href="projektverwaltung_startpage.php"><i class="fa fa-fw fa-file-export"></i> Projekt Verwaltung</a>';
+        }
+        $sidebar .=    '<a href="reporterstellen_startpage.php"><i class="fa fa-fw fa-wrench"></i> Report Erstellen</a>
+                        <br><br><br><br><br><br><br><br>
                         <a href="logout.php"><i class="far fa-caret-square-left"></i></i> LOGOUT</a>
                      </div>';
         return $sidebar;
@@ -77,6 +64,17 @@ class Helper
                    </body>
                    </html>';
         return $footer;
+    }
+
+    public static function sessionChecker($_Session){
+        echo "Hello from Session Checker";
+        /*
+        if($_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
+        session_unset();
+        session_destroy();
+        setcookie(session_name(),"invalid",0,"/");
+        }
+        */
     }
 
 }

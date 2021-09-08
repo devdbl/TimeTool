@@ -8,18 +8,22 @@ session_start();
 $helper = new Helper();
 $header = $helper->getHeader("Projekt anlegen");
 $navbar = $helper->getNavbar();
-$sidebar = $helper->getSidebar();
+$sidebar = $helper->getSidebar($_SESSION['admin']);
 $footer = $helper->getFooter();
 $showForm = true;
 $error = false;
-$projectId = 1234; //muss noch automatisiert werden
+$projectId = $_GET['projectId'];
 
 echo $header;
 echo $navbar;
 
-/*if(!isset($_SESSION['userid'])) {
+if(!isset($_SESSION['userid'])) {
     die('<div class="inhalt">Bitte zuerst <a href="login.php">einloggen</a></div>');
-}else {*/
+}elseif($_SESSION['ip'] != $_SERVER['REMOTE_ADDR']) {
+    session_unset();
+    session_destroy();
+    setcookie(session_name(),"invalid",0,"/");
+}else {
 
 echo $sidebar;
 
@@ -57,18 +61,18 @@ if($showForm) {
                 <form action="?edit" method="post">
                     <div class="form-group">
                         <label for="projectName">Projektname:</label>
-                        <input type="text" class="form-control" id="projectName" name="projectname">
+                        <input type="text" class="form-control" id="projectName" required name="projectname">
                     </div>
                     <div class="form-group">
                         <label for="description">Beschreibung</label>
                         <input type="text" class="form-control" id="description" name="description">
                     </div>
                     <div class="custom-control custom-checkbox mb-3">
-                        <input type="checkbox" value="1" class="custom-control-input" id="customCheck" name="isActive">
+                        <input type="checkbox" value="1" class="custom-control-input" id="customCheck" checked name="isActive">
                         <label class="custom-control-label" for="customCheck">Projekt ist aktiv</label>
                     </div>
                     <input type="submit" class="btn btn-info" value="Projekt updaten">
                 </form>';
 }
 echo $footer;
-//}
+}

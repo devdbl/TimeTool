@@ -8,15 +8,12 @@ session_start();
 $script = '<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
            <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
            <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-           <script>
-               $(document).ready(function() {
-                   $("#report").DataTable();
-               } );
-           </script>';
+           <script src="JS/DataTable.js"></script>';
+
 $helper = new Helper();
 $header = $helper->getHeader("Bericht erstellen", $script);
 $navbar = $helper->getNavbar();
-$sidebar = $helper->getSidebar();
+$sidebar = $helper->getSidebar($_SESSION['admin']);
 $footer = $helper->getFooter();
 $showForm = true;
 $html = null;
@@ -26,6 +23,10 @@ echo $navbar;
 
 if(!isset($_SESSION['userid'])) {
     die('<div class="inhalt">Bitte zuerst <a href="login.php">einloggen</a></div>');
+}elseif($_SESSION['ip'] != $_SERVER['REMOTE_ADDR']) {
+    session_unset();
+    session_destroy();
+    setcookie(session_name(),"invalid",0,"/");
 }else {
 
     echo $sidebar;

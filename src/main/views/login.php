@@ -24,7 +24,12 @@ if(isset($_GET['login'])) {
         $_SESSION['userid'] = $user['EMPLOYEE_ID'];
         $_SESSION['name']   = $user['FIRSTNAME'];
         $_SESSION['admin']= (int) $user['ROLE'];
+        $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
         die(header('Location: http://localhost/'));
+    }elseif($_SESSION['ip'] != $_SERVER['REMOTE_ADDR']) {
+        session_unset();
+        session_destroy();
+        setcookie(session_name(),"invalid",0,"/");
     } else {
         $errorMessage = "Kürzel oder Passwort war ungültig<br>";
     }
