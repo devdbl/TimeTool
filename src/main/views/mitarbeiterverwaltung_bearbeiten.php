@@ -61,11 +61,11 @@ if(!isset($_SESSION['userid'])) {
                 <form action="?edit" method="post">
                     <div class="form-group">
                         <label for="firstname">Vorname</label>
-                        <input type="text" class="form-control" id="firstname" name="firstname">
+                        <input type="text" class="form-control" id="firstname" maxlength="20" name="firstname">
                     </div>
                     <div class="form-group">
                         <label for="lastname">Nachname</label>
-                        <input type="text" class="form-control" id="lastname" name="lastname">
+                        <input type="text" class="form-control" id="lastname" maxlength="20" name="lastname">
                     </div>
                     <div class="form-group">
                         <label for="pwd">Passwort</label>
