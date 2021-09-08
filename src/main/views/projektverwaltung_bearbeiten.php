@@ -12,7 +12,7 @@ $sidebar = $helper->getSidebar($_SESSION['admin']);
 $footer = $helper->getFooter();
 $showForm = true;
 $error = false;
-$projectId = 1234; //muss noch automatisiert werden
+$projectId = $_GET['projectId'];
 
 echo $header;
 echo $navbar;
@@ -61,14 +61,14 @@ if($showForm) {
                 <form action="?edit" method="post">
                     <div class="form-group">
                         <label for="projectName">Projektname:</label>
-                        <input type="text" class="form-control" id="projectName" name="projectname">
+                        <input type="text" class="form-control" id="projectName" required name="projectname">
                     </div>
                     <div class="form-group">
                         <label for="description">Beschreibung</label>
                         <input type="text" class="form-control" id="description" name="description">
                     </div>
                     <div class="custom-control custom-checkbox mb-3">
-                        <input type="checkbox" value="1" class="custom-control-input" id="customCheck" name="isActive">
+                        <input type="checkbox" value="1" class="custom-control-input" id="customCheck" checked name="isActive">
                         <label class="custom-control-label" for="customCheck">Projekt ist aktiv</label>
                     </div>
                     <input type="submit" class="btn btn-info" value="Projekt updaten">
