@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image
 
 on:
   pull_request:
@@ -20,8 +20,8 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag TimeDock:$(date +%s)
       
-    - name: Scan with Phonito Security
-      uses: phonito/phonito-scanner-action@main
+    - name: Scan docker image
+      uses: Azure/container-scan@v0
       with:
+         severity-threshold: MEDIUM
          image: TimeDock:${{ steps.vars.outputs.docker_tag }}
-         phonito-token: ${{ secrets.PHONITO_TOKEN }}
