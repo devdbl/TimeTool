@@ -4,21 +4,12 @@ on:
   push:
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Set tag var
-      id: vars
-      run: echo ::set-output name=docker_tag::$(echo ${GITHUB_REF} | cut -d'/' -f3)-${GITHUB_SHA}
-
     - name: Build the Docker image
-      run: docker build . --file dockerfile --tag timedock:$(date +%s)
-      
+      run: docker build . -t timedock:${{ github.sha }}  
     - name: Scan docker image
       uses: Azure/container-scan@v0
       with:
