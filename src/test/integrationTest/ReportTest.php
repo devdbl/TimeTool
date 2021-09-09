@@ -22,11 +22,11 @@ class ReportTest extends TestCase
         $reportController = new ReportController($dbConnection, $requestMethod, $projectId, $userId, $dateArray, $overview);
         $reportController->processRequest();
 
-        foreach($reportController->dataArray as $row){
+        while($reportController->dataArray){
             $sum++;
         }
 
-        $this->assertEquals(2, $sum);
+        $this->assertEquals(4, $sum);
     }
 
 }
