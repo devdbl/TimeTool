@@ -5,8 +5,10 @@ require_once("Helper.php");
 
 session_start();
 
+$script = ' <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+            <script src="JS/getProjects.js"></script>';
 $helper = new Helper();
-$header = $helper->getHeader("Zeiterfassen");
+$header = $helper->getHeader("Zeiterfassen", $script);
 $navbar = $helper->getNavbar();
 $sidebar = $helper->getSidebar($_SESSION['admin']);
 $footer = $helper->getFooter();
@@ -47,6 +49,18 @@ if(!isset($_SESSION['userid'])) {
 
 
     }
+
+    echo '
+          <div class="inhalt">
+            <h1>Projekt auswälen</h1>  
+            <br>         
+            <button id="showProject" class="btn btn-info">Projekte anzeigen</button>
+            <br><br>
+            <h3>Projekte</h3>
+            <ol id="projectList"></ol>       
+            
+            <br><br>
+            </div>';
 
     if($showForm) {
         echo '
