@@ -17,7 +17,7 @@ jobs:
       run: echo ::set-output name=docker_tag::$(echo ${GITHUB_REF} | cut -d'/' -f3)-${GITHUB_SHA}
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag TimeDock:$(date +%s)
+      run: docker build . --file Dockerfile --tag timedock:$(date +%s)
       
     - name: Scan docker image
       uses: Azure/container-scan@v0
