@@ -50,7 +50,8 @@ if(!isset($_SESSION['userid'])) {
 
     }
 
-    echo '
+    if($showForm) {
+       echo '
           <div class="inhalt">
             <h1>Projekt auswälen</h1>  
             <br>         
@@ -61,8 +62,6 @@ if(!isset($_SESSION['userid'])) {
             
             <br><br>
             </div>';
-
-    if($showForm) {
         echo '
             <div class="inhalt">
                 <h1>Zeiterfassen</h1>
