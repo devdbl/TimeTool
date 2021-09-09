@@ -9,9 +9,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . -t timedock:${{ github.sha }}  
+      run: docker build . -t timedock:${{ github.sha }}
     - name: Scan docker image
       uses: Azure/container-scan@v0
       with:
          severity-threshold: MEDIUM
-         image-name: timedock:${{ steps.vars.outputs.docker_tag }}
+         image-name: timedock:${{ github.sha }}
