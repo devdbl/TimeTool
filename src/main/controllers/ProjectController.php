@@ -76,7 +76,7 @@ class ProjectController{
 
     private function createProject(){
         $input = $_POST;
-        if (! $this->validation->validateProject($input)) {
+        if (!$this->validation->validateProject($input)) {
             return $this->validation->unprocessableEntityResponse();
         }
         $this->projectGateway->add($input);

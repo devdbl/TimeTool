@@ -26,7 +26,7 @@ class Validation
         return true;
     }
 
-    private function validateProject($input){
+    public function validateProject($input){
         if (! isset($input['projectId'])) {
             return false;
         }
@@ -36,7 +36,7 @@ class Validation
         return true;
     }
 
-    private function validateProjectUpdate($input){
+    public function validateProjectUpdate($input){
         if (! isset($input['projectname'])) {
             return false;
         }

@@ -52,6 +52,8 @@ if(!isset($_SESSION['userid'])) {
 
             $projectController = new ProjectController($dbConnection, $requestMethod, $projectId, $getDeactivatedProjects);
             $projectController->processRequest();
+
+            echo '<div class="text">Projekt erstellt<br></div>';
         }
     }
 

@@ -1,10 +1,12 @@
 <?php
 require_once("../controllers/ProjectController.php");
 require_once("../tools/DatabaseConnector.php");
+require_once("../tools/Validation.php");
 require_once ("Helper.php");
 
 session_start();
 
+$valid = new Validation();
 $helper = new Helper();
 $header = $helper->getHeader("Projekt anlegen");
 $navbar = $helper->getNavbar();
@@ -12,7 +14,6 @@ $sidebar = $helper->getSidebar($_SESSION['admin']);
 $footer = $helper->getFooter();
 $showForm = true;
 $error = false;
-$projectId = $_GET['projectId'];
 
 echo $header;
 echo $navbar;
@@ -32,6 +33,7 @@ if(isset($_GET['edit'])){
     $getDeactivatedProjects = null;
     $showForm = false;
     $requestMethod = 'PUT';
+    $projectId = (int) $_GET['edit'];
 
     if(strlen($_POST['projectname']) == 0) {
         echo '<div class="text"><mark>Bitte ein Projektnamen angeben</mark><br></div>';
@@ -54,11 +56,12 @@ if(isset($_GET['edit'])){
 
 
 if($showForm) {
+    $projectId = (int) $valid->validateInput($_GET['projectId']);
     echo '
           <div class="inhalt">
             <h1>Bitte erfasse deine Änderungen</h1>
             <h2>Projektnummer: '.$projectId.'</h2>
-                <form action="?edit" method="post">
+                <form action="?edit='.$projectId.'" method="post">
                     <div class="form-group">
                         <label for="projectName">Projektname:</label>
                         <input type="text" class="form-control" id="projectName" required name="projectname">
@@ -72,7 +75,7 @@ if($showForm) {
                         <label class="custom-control-label" for="customCheck">Projekt ist aktiv</label>
                     </div>
                     <input type="submit" class="btn btn-info" value="Projekt updaten">
-                </form>';
+                    </form>';
 }
 echo $footer;
 }
