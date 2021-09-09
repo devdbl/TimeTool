@@ -3,13 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 10, 2021 at 10:01 PM
+-- Generation Time: Sep 10, 2021 at 12:31 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+01:00";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -24,7 +24,7 @@ SET time_zone = "+01:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `api`
+-- Table structure for table `employee`
 --
 
 CREATE TABLE `employee` (
@@ -39,14 +39,12 @@ CREATE TABLE `employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `api`
+-- Dumping data for table `employee`
 --
 
 INSERT INTO `employee` (`EMPLOYEE_ID`, `FIRSTNAME`, `LASTNAME`, `SHORTNAME`, `PASSWORD`, `ROLE`, `CREATED`, `UPDATED`) VALUES
-(1000, 'Simon', 'Buchmann', 'sbu', '1234', 0, '2021-08-08 13:25:00', '2021-08-08 13:25:00'),
-(1147, 'Dominic', 'Blattner', 'dbl', '1234', 0, '2021-08-08 13:24:03', '2021-08-08 13:24:03'),
-(9000, 'Teodor', 'Bucher', 'tbu', '4321', 2, '2021-08-08 13:26:17', '2021-08-08 13:26:17'),
-(9999, 'Ulrich', 'Admin', 'tad', '12345', 1, '2021-08-08 13:26:44', '2021-08-08 13:26:17');
+(1147, 'Dominic', 'Blattner', 'dbl', '$2y$10$l4N7uty3nnajGGha2lkjMuqA2.uv2XECPDARqOuE6fhmtQqzznWku', 1, '2021-09-07 21:04:30', '2021-08-08 13:24:03'),
+(5555, 'Hans', 'Lustig', 'hlu', '$2y$10$SFk3yHKZ/NXJAcNgOEDxYOFW2b1bwI/JqZihCbMZvmledzl6i04Ty', 0, '2021-08-31 19:32:18', '2021-08-31 16:16:10');
 
 -- --------------------------------------------------------
 
@@ -57,16 +55,21 @@ INSERT INTO `employee` (`EMPLOYEE_ID`, `FIRSTNAME`, `LASTNAME`, `SHORTNAME`, `PA
 CREATE TABLE `project` (
   `PROJECT_ID` double NOT NULL,
   `PROJECTNAME` varchar(20) NOT NULL,
-  `DESCRIPTION` varchar(45) DEFAULT NULL
+  `DESCRIPTION` varchar(45) DEFAULT NULL,
+  `IS_ACTIVE` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `project`
 --
 
-INSERT INTO `project` (`PROJECT_ID`, `PROJECTNAME`, `DESCRIPTION`) VALUES
-(12.12, 'MyFirstProject', 'TryToGetThisOutOfDatabase'),
-(4567.123, 'MySecondProject', NULL);
+INSERT INTO `project` (`PROJECT_ID`, `PROJECTNAME`, `DESCRIPTION`, `IS_ACTIVE`) VALUES
+(12, 'qwert', 'HalliHallo', 1),
+(1234, 'WebApp', 'Testing the webapp', 1),
+(4567, 'MySecondProject', NULL, 1),
+(31013, 'NotActive', 'Ein nicht aktives Projekt', 0),
+(31031, 'First API Project', 'First API updated Project', 0),
+(98745, 'Validation Test Proj', 'Add with new Validation', 1);
 
 -- --------------------------------------------------------
 
@@ -78,18 +81,29 @@ CREATE TABLE `time` (
   `ID` int(11) NOT NULL,
   `PROJECT_ID` double NOT NULL,
   `EMPLOYEE_ID` int(11) NOT NULL,
-  `TIME` varchar(45) NOT NULL,
-  `WEEK` varchar(45) NOT NULL,
-  `EDIT` datetime NOT NULL,
+  `TIME` int(24) NOT NULL,
+  `REPORTDATE` date NOT NULL,
+  `EDIT` datetime NOT NULL DEFAULT current_timestamp(),
   `COMMENT` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `time`
+--
+
+INSERT INTO `time` (`ID`, `PROJECT_ID`, `EMPLOYEE_ID`, `TIME`, `REPORTDATE`, `EDIT`, `COMMENT`) VALUES
+(1, 1234, 1147, 8, '2021-08-17', '2021-08-16 21:25:33', 'Meine erste Buchung'),
+(2, 1234, 1147, 2, '2021-08-19', '2021-08-16 21:25:33', 'Meine zweite Buchung'),
+(32, 31031, 1147, 10, '2021-08-18', '2021-09-05 14:48:53', NULL),
+(39, 1234, 5555, 10, '2021-08-11', '2021-09-10 00:17:52', NULL),
+(40, 31013, 5555, 10, '2021-08-17', '2021-09-10 00:17:52', NULL);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `api`
+-- Indexes for table `employee`
 --
 ALTER TABLE `employee`
   ADD PRIMARY KEY (`EMPLOYEE_ID`),
@@ -114,16 +128,16 @@ ALTER TABLE `time`
 --
 
 --
--- AUTO_INCREMENT for table `api`
+-- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `EMPLOYEE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000;
+  MODIFY `EMPLOYEE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12347;
 
 --
 -- AUTO_INCREMENT for table `time`
 --
 ALTER TABLE `time`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- Constraints for dumped tables

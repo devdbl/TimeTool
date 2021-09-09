@@ -9,7 +9,7 @@ services:
       - "3306:3306"
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: enabled
-      MYSQL_DATABASE: time
+      MYSQL_DATABASE: timetool
       MYSQL_USER: user
       MYSQL_PASSWORD: mypw
   admin:
