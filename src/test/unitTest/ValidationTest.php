@@ -15,7 +15,6 @@ class ValidationTest extends TestCase
 
     public function testValidateInputStripcslashes(){
         $data = '\hello';
-        echo stripcslashes($data);
         $validInput = new Validation();
         $data = $validInput->validateInput($data);
         $this->assertEquals("hello", $data);

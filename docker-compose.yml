@@ -1,44 +1,31 @@
-version: '3'
+version: "3.8"
 
 services:
-  web:
-    build: .
-    ports:
-      - '8080:8080'
-    volumes:
-      - ./src/main:/var/web/html/
-    links:
-      - db
-    networks:
-      - default
   db:
-    image: mysql:8.0
-    ports:
-      - '3307:3307'
-    environment:
-      MYSQL_DATABASE: myDb
-      MYSQL_USER: user
-      MYSQL_PASSWORD: test
-      MYSQL_ROOT_PASSWORD: test
-    volumes:
-      - ./SQL/dump:/docker-entrypoint-initdb.d
-      - persistent:/var/lib/mysql
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
-    networks:
-      - default
-  phpmyadmin:
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: enabled
+      MYSQL_DATABASE: time
+      MYSQL_USER: user
+      MYSQL_PASSWORD: mypw
+  admin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8090:80"
+    environment:
+      - PMA_ARBITRARY=1
+  timetool:
+    build: .
+    container_name: timetool
     depends_on:
       - db
-    image: phpmyadmin/phpmyadmin
     restart: always
-    links:
-      - db:db
+    volumes:
+      - ./src/main/:/var/www/html/
     ports:
-      - '8080:8080'
-    environment:
-      MYSQL_USER: user
-      MYSQL_PASSWORD: test
-      MYSQL_ROOT_PASSWORD: test
-volumes:
-  persistent:
-  
+      - "8080:80"
