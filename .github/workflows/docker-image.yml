@@ -23,4 +23,4 @@ jobs:
       uses: Azure/container-scan@v0
       with:
          severity-threshold: MEDIUM
-         image: TimeDock:${{ steps.vars.outputs.docker_tag }}
+         image-name: timedock:${{ steps.vars.outputs.docker_tag }}
