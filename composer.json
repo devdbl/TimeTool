@@ -19,7 +19,7 @@
 	    "ext-pdo": "*"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "9.5.*"
+		"phpunit/phpunit": "9.6.*"
   	},
 	"scripts": {
             "unittest": "./vendor/bin/phpunit --testdox --colors=always ./src/test/unitTest"
